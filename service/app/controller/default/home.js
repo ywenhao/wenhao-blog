@@ -7,10 +7,6 @@ class HomeController extends Controller {
     const { ctx } = this;
     ctx.body = 'api接口';
   }
-  async list() {
-    const { ctx } = this;
-    ctx.body = '<h1>Ywenhao\'s blog list</h1>';
-  }
 }
 
 module.exports = HomeController;
