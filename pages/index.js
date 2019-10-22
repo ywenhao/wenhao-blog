@@ -11,7 +11,6 @@ import Axios from 'axios'
 
 const Home = (list) => {
   const [ myList , setMyList ] = React.useState(list.data)
-console.log(list.data)
   return (
   <>
     <Head>
