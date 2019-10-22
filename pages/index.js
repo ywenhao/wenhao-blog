@@ -11,7 +11,7 @@ import Axios from 'axios'
 
 const Home = (list) => {
   const [ myList , setMyList ] = React.useState(list.data)
-
+console.log(list.data)
   return (
   <>
     <Head>
@@ -33,11 +33,11 @@ const Home = (list) => {
               </Link>
             </div>
             <div className="list-icon">
-              <span><Icon type="calendar" /> 2019-06-28</span>
-              <span><Icon type="folder" /> 视频教程</span>
-              <span><Icon type="fire" /> 5498人</span>
+              <span><Icon type="calendar" />{item.addTime.replace('T',' ').replace('.000Z', '')}</span>
+              <span><Icon type="folder" /> {item.typeName}</span>
+              <span><Icon type="fire" />{item.view_count}人</span>
             </div>
-            <div className="list-context">{item.context}</div>
+            <div className="list-context">{item.introduce}</div>
             <div className="list-more">
               <Link href={{pathname:'/detailed',query:{id: item.id}}}>
                 <a>阅读全文 >>> </a>

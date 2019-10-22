@@ -13,9 +13,17 @@ import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 import Axios from 'axios'
+import Tocify from '../components/tocify.tsx'
 
 const Detailed = (props) => {
+    let articleContent=props.article_content
+    const tocify = new Tocify()
     const renderer = new marked.Renderer();
+      renderer.heading = function(text, level, raw) {
+        const anchor = tocify.add(text, level);
+        return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+      };
+
     marked.setOptions({
         renderer: renderer, 
         gfm: true,
@@ -30,41 +38,7 @@ const Detailed = (props) => {
         }
     }); 
 
-    let markdown = marked(props.article_content) 
-    // let markdown='# P01:课程介绍和环境搭建\n' +
-    //     '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
-    //     '> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
-    //     '**这是加粗的文字**\n\n' +
-    //     '*这是倾斜的文字*`\n\n' +
-    //     '***这是斜体加粗的文字***\n\n' +
-    //     '~~这是加删除线的文字~~ \n\n'+
-    //     '\`console.log(111)\` \n\n'+
-    //     '# p02:来个Hello World 初始Vue3.0\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n'+
-    //     '***\n\n\n' +
-    //     '# p03:Vue3.0基础知识讲解\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n\n'+
-    //     '# p04:Vue3.0基础知识讲解\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n\n'+
-    //     '#5 p05:Vue3.0基础知识讲解\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n\n'+
-    //     '# p06:Vue3.0基础知识讲解\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n\n'+
-    //     '# p07:Vue3.0基础知识讲解\n' +
-    //     '> aaaaaaaaa\n' +
-    //     '>> bbbbbbbbb\n' +
-    //     '>>> cccccccccc\n\n'+
-    //     '``` var a=11; ```'
+    let markdown = marked(props.article_content);
     return (
         <>
             <Head>
@@ -86,9 +60,9 @@ const Detailed = (props) => {
                                 React实战视频教程-技术胖Blog开发(更新08集)
                             </div>
                             <div className="list-icon center">
-                                <span><Icon type="calendar"/> 2019-06-28</span>
-                                <span><Icon type="folder"/> 视频教程</span>
-                                <span><Icon type="fire"/> 5498人</span>
+                                <span><Icon type="calendar"/>{props.addTime.replace('T',' ').replace('.000Z', '')}</span>
+                                <span><Icon type="folder"/> {props.typeName}</span>
+                                <span><Icon type="fire"/> {props.view_count}人</span>
                             </div>
                             <div className="detailed-content">
                                 <ReactMarkdown
@@ -106,11 +80,14 @@ const Detailed = (props) => {
                     <Affix offsetTop={5}>
                         <div className="detailed-nav comm-box">
                             <div className="nav-title">文章目录</div>
-                            <MarkNav
+                            <div className="toc-list">
+                                {tocify && tocify.render()}
+                            </div>
+                            {/* <MarkNav
                                 className="article-menu"
                                 source={markdown}
                                 ordered={false}
-                            />
+                            /> */}
                         </div>
                     </Affix>
                 </Col>
