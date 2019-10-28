@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 18/10/2019 12:58:42
+ Date: 28/10/2019 12:41:47
 */
 
 SET NAMES utf8mb4;
@@ -67,14 +67,15 @@ CREATE TABLE `type`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `typeName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `orderNum` int(11) NULL DEFAULT NULL,
+  `icon` varchar(255) CHARACTER SET utf32 COLLATE utf32_general_ci NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of type
 -- ----------------------------
 BEGIN;
-INSERT INTO `type` VALUES (1, '生活分类', 1);
+INSERT INTO `type` VALUES (1, '快乐生活', 1, 'smile'), (2, '前端文章', 2, 'html5'), (3, '絮絮叨叨', 3, 'message');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
