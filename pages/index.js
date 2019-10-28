@@ -8,18 +8,20 @@ import Author from '../components/Author'
 import Advert from '../components/Advert'
 import '../static/style/pages/index.css'
 import Axios from 'axios'
+import  servicePath  from '../config/apiUrl'
 
-const Home = (list) => {
-  const [ myList , setMyList ] = React.useState(list.data)
+const Home = (res) => {
+  const [ myList , setMyList ] = React.useState(res.list);
+  const [ type , setType ] = React.useState(res.type);
   return (
   <>
     <Head>
         <title>Ywenhao's Blog</title>
     </Head>
-    <Header />
+    <Header type={type}/>
     <Row className="comm-main" type="flex" justify="center">
       <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
-      <div>    
+      <div>
       <List
         header={<div>最新日志</div>}
         itemLayout="vertical"
@@ -44,7 +46,7 @@ const Home = (list) => {
             </div>
           </List.Item>
         )}
-      />    
+      />
     </div>
       </Col>
 
@@ -59,7 +61,7 @@ const Home = (list) => {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    Axios('http://127.0.0.1:7001/default/getArticleList').then( res => {
+    Axios(servicePath.getArticleList).then( res => {
       resolve(res.data)
     })
   })

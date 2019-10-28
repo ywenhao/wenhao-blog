@@ -7,13 +7,14 @@ import Footer from '../components/Footer'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import '../static/style/pages/detailed.css'
-import MarkNav from 'markdown-navbar'
+// import MarkNav from 'markdown-navbar'
 import 'markdown-navbar/dist/navbar.css'
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 import Axios from 'axios'
 import Tocify from '../components/tocify.tsx'
+import  servicePath  from '../config/apiUrl'
 
 const Detailed = (props) => {
     let articleContent=props.article_content
@@ -25,7 +26,7 @@ const Detailed = (props) => {
       };
 
     marked.setOptions({
-        renderer: renderer, 
+        renderer: renderer,
         gfm: true,
         pedantic: false,
         sanitize: false,
@@ -36,7 +37,7 @@ const Detailed = (props) => {
         highlight: function (code) {
             return hljs.highlightAuto(code).value;
         }
-    }); 
+    });
 
     let markdown = marked(props.article_content);
     return (
@@ -98,11 +99,11 @@ const Detailed = (props) => {
 }
 
 Detailed.getInitialProps = async(context)=>{
-  
+
     let id = context.query.id
     const promise = new Promise((resolve)=>{
-  
-      Axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(
+
+      Axios(servicePath.getArticleById + id).then(
         (res)=>{
           resolve(res.data.data[0])
         }

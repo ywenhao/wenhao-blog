@@ -1,4 +1,4 @@
-import React from 'react';
+import 'react';
 import { Anchor } from 'antd';
 import { last } from 'lodash';
 
