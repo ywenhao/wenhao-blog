@@ -41,17 +41,12 @@ module.exports = appInfo => {
     // load into agent, default is close
     agent: false,
   };
-
-  // config.security = {
-  //   csrf: {
-  //     enable: false,
-  //     ignoreJSON: true,
-  //   },
-  //   domainWhiteList: '*',
-  // };
-
+  config.security = {
+    csrf: { enable: false },
+    domainWhiteList: [ '*' ],
+  };
   config.cors = {
-    origin: '*',
+    origin: 'http://localhost:3000',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
 

@@ -9,11 +9,29 @@ import Advert from '../components/Advert'
 import '../static/style/pages/index.css'
 import Axios from 'axios'
 import  servicePath  from '../config/apiUrl'
+import marked from 'marked'
+import hljs from "highlight.js";
+import 'highlight.js/styles/monokai-sublime.css';
 
 const Home = (res) => {
   const [ myList , setMyList ] = React.useState(res.list);
   const [ type , setType ] = React.useState(res.type);
-  return (
+    const renderer = new marked.Renderer();
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        breaks: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+    return (
   <>
     <Head>
         <title>Ywenhao's Blog</title>
@@ -38,7 +56,9 @@ const Home = (res) => {
               <span><Icon type="folder" /> {item.typeName}</span>
               <span><Icon type="fire" />{item.view_count}人</span>
             </div>
-            <div className="list-context">{item.introduce}</div>
+              <div className="list-context"
+                   dangerouslySetInnerHTML={{__html:marked(item.introduce)}}
+              />
             <div className="list-more">
               <Link href={{pathname:'/detailed',query:{id: item.id}}}>
                 <a>阅读全文 >>> </a>
