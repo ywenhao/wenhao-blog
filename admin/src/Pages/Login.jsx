@@ -1,9 +1,41 @@
 import React  from 'react';
+import { Card, Input, Icon,Button ,Spin } from 'antd';
+import 'antd/dist/antd.css';
+import '../static/css/Login.css';
 
-function Login(){
+function Login() {
+    const [userName , setUserName] = React.useState('')
+    const [password , setPassword] = React.useState('')
+    const [isLoading, setIsLoading] = React.useState(false)
+    const checkLogin = ()=>{
+        setIsLoading(true)
+        setTimeout(()=>{
+            setIsLoading(false)
+        }, 1000)
+    }
     return (
-        <div>
-           我是登录页面 
+        <div className="login-div">
+            <Spin tip="Loading..." spinning={isLoading}>
+                <Card title="Ywenhao's Blog  System" bordered={true} style={{ width: 400 }} >
+                    <Input
+                        id="userName"
+                        size="large"
+                        placeholder="Enter your userName"
+                        prefix={<Icon type="user" style={{color:'rgba(0,0,0,.25)'}} />}
+                        onChange={(e)=>{setUserName(e.target.value)}}
+                    /> 
+                    <br/><br/>
+                    <Input.Password
+                        id="password"
+                        size="large"
+                        placeholder="Enter your password"
+                        prefix={<Icon type="key" style={{color:'rgba(0,0,0,.25)'}} />}
+                        onChange={(e)=>{setPassword(e.target.value)}}
+                    />     
+                    <br/><br/>
+                    <Button type="primary" size="large" block onClick={checkLogin} > Login in </Button>
+                </Card>
+            </Spin>
         </div>
     )
 }
