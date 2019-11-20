@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route } from "react-router-dom";
+import AddArticle from './AddArticle'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import '../static/css/AdminIndex.css';
 
@@ -49,7 +51,11 @@ function AdminIndex() {
             <Breadcrumb.Item>后台管理系统</Breadcrumb.Item>
             <Breadcrumb.Item>工作台</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>YWENHAO的博客管理系统</div>
+          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+          <div>
+            <Route path="/index/" exact  component={ AddArticle } />
+          </div>
+          </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Ywenhao's Blog</Footer>
       </Layout>
