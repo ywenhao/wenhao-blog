@@ -11,11 +11,27 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 28/10/2019 12:41:47
+ Date: 27/11/2019 13:57:36
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for admin_user
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_user`;
+CREATE TABLE `admin_user`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin_user
+-- ----------------------------
+INSERT INTO `admin_user` VALUES (1, 'admin', '123456');
 
 -- ----------------------------
 -- Table structure for article
@@ -30,14 +46,12 @@ CREATE TABLE `article`  (
   `addTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `view_count` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-BEGIN;
 INSERT INTO `article` VALUES (2, 1, '测试文章1', '介绍', '内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1', '2019-10-18 11:35:06', 0);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for blog_content
@@ -50,14 +64,12 @@ CREATE TABLE `blog_content`  (
   `introduce` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_content
 -- ----------------------------
-BEGIN;
 INSERT INTO `blog_content` VALUES (1, '测试文章1', '生活分类', '', '');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for type
@@ -69,13 +81,13 @@ CREATE TABLE `type`  (
   `orderNum` int(11) NULL DEFAULT NULL,
   `icon` varchar(255) CHARACTER SET utf32 COLLATE utf32_general_ci NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of type
 -- ----------------------------
-BEGIN;
-INSERT INTO `type` VALUES (1, '快乐生活', 1, 'smile'), (2, '前端文章', 2, 'html5'), (3, '絮絮叨叨', 3, 'message');
-COMMIT;
+INSERT INTO `type` VALUES (1, '快乐生活', 1, 'smile');
+INSERT INTO `type` VALUES (2, '前端文章', 2, 'html5');
+INSERT INTO `type` VALUES (3, '絮絮叨叨', 3, 'message');
 
 SET FOREIGN_KEY_CHECKS = 1;
