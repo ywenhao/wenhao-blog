@@ -1,17 +1,49 @@
 import React  from 'react';
-import { Card, Input, Icon,Button ,Spin } from 'antd';
+import { Card, Input, Icon, Button, Spin, message } from 'antd';
+import axios from 'axios';
+import  servicePath  from '../config/apiUrl';
 import 'antd/dist/antd.css';
 import '../static/css/Login.css';
 
-function Login() {
+function Login(props) {
     const [userName , setUserName] = React.useState('')
     const [password , setPassword] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(false)
-    const checkLogin = ()=>{
+    const checkLogin = ()=> {
         setIsLoading(true)
-        setTimeout(()=>{
+
+        if(!userName){
             setIsLoading(false)
-        }, 1000)
+            message.error('用户名不能为空')
+            return false
+        }else if(!password){
+            setIsLoading(false)
+            message.error('密码不能为空')
+            return false
+        }
+        let dataProps = {
+            'userName': userName,
+            'password': password
+        }
+        axios({
+            method:'POST',
+            url: servicePath.checkLogin,
+            data: dataProps,
+            withCredentials: true,
+        }).then(
+           res => {
+                setIsLoading(false)
+                if(res.data.data === '登录成功') {
+                    localStorage.setItem('openId',res.data.openId)
+                    props.history.push('/index')
+                }else{
+                    message.error('用户名密码错误')
+                }
+           }
+        ).catch(err => {
+            setIsLoading(false)
+            message.error('网络故障')
+        })
     }
     return (
         <div className="login-div">
@@ -23,7 +55,7 @@ function Login() {
                         placeholder="Enter your userName"
                         prefix={<Icon type="user" style={{color:'rgba(0,0,0,.25)'}} />}
                         onChange={(e)=>{setUserName(e.target.value)}}
-                    /> 
+                    />
                     <br/><br/>
                     <Input.Password
                         id="password"
@@ -31,7 +63,7 @@ function Login() {
                         placeholder="Enter your password"
                         prefix={<Icon type="key" style={{color:'rgba(0,0,0,.25)'}} />}
                         onChange={(e)=>{setPassword(e.target.value)}}
-                    />     
+                    />
                     <br/><br/>
                     <Button type="primary" size="large" block onClick={checkLogin} > Login in </Button>
                 </Card>
