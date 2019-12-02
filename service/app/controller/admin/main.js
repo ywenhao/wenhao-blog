@@ -48,8 +48,8 @@ module.exports = app => {
     }
 
     async loginOut() {
-      this.ctx.session.token = '';
-      if (!this.ctx.session.token) {
+      this.ctx.session.token.token = '';
+      if (!this.ctx.session.token.token) {
         this.ctx.body = { code: 200, data: '退出登录成功' };
       } else {
         this.ctx.body = { code: 999, data: '退出登录失败' };
