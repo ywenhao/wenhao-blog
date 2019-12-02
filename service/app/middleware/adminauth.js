@@ -2,11 +2,10 @@
 
 module.exports = () => {
   return async function adminauth(ctx, next) {
-    console.log(ctx.session.openId);
-    if (ctx.session.openId) {
+    if (ctx.session.token.token) {
       await next();
     } else {
-      ctx.body = { data: '没有登录' };
+      ctx.body = { code: 999, data: '请重新登录' };
     }
   };
 };

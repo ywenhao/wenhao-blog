@@ -1,17 +1,45 @@
 import React from 'react';
 import { Route } from "react-router-dom";
 import AddArticle from './AddArticle'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
 import '../static/css/AdminIndex.css';
+import Axios from 'axios';
+import  servicePath  from '../config/apiUrl';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex() {
+function AdminIndex(props) {
   const [collapsed, setCollapsed] = React.useState(false)
+  const [avatarVisible, setAvatarVisible] = React.useState(false);
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
   };
+  const loginOut = () => {
+    Axios(servicePath.checkOut).then(
+      res => {
+        if (res.data.code === 200) {
+          message.success(res.data.data, 2, () => props.history.push('/login'))
+        } else {
+          message.error(res.data.data)
+        }
+      }
+    )
+  }
+  const avatarHandler = ({key}) => {
+    if (key === 'loginOut') {
+      loginOut()
+    }
+  }
+  React.useEffect(() => {
+    Axios(servicePath.checkLoginStatus).then(
+      res => {
+        if(res.data.code === 999) {
+          message.error(res.data.data, 2, () => props.history.push('/login'));
+        }
+      }
+    )
+  })
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -45,7 +73,21 @@ function AdminIndex() {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }} />
+        <Header style={{ background: '#fff', padding: 0 }} >
+            <Dropdown
+              overlay={(
+                <Menu onClick={avatarHandler}>
+                  <Menu.Item key="setting">个人设置</Menu.Item>
+                  <Menu.Item key="loginOut">退出登录</Menu.Item>
+                </Menu>
+              )}
+              placement="bottomLeft"
+              visible={avatarVisible}
+              onVisibleChange={(e)=>setAvatarVisible(e)}
+              >
+              <Avatar icon="user" style={{position: "absolute", right: '40px', top: '40px'}}/>
+            </Dropdown>
+        </Header>
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>后台管理系统</Breadcrumb.Item>

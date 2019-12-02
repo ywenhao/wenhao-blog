@@ -33,11 +33,11 @@ function Login(props) {
         }).then(
            res => {
                 setIsLoading(false)
-                if(res.data.data === '登录成功') {
-                    localStorage.setItem('openId',res.data.openId)
+                if(res.data.code === 200) {
+                    localStorage.setItem('token',res.data.token)
                     props.history.push('/index')
                 }else{
-                    message.error('用户名密码错误')
+                    message.error(res.data.data)
                 }
            }
         ).catch(err => {
