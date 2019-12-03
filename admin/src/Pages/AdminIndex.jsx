@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import AddArticle from './AddArticle'
-import NotFound from './NotFound'
 import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
