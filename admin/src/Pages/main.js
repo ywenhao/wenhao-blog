@@ -7,6 +7,7 @@ function Main() {
     return (
         <Router>
             <Switch>
+                {/*<Route exact path="/" render={() => <Redirect to="/index"/>} />*/}
                 <Route path="/login/" exact component={Login} />
                 <Route path="/index/" exact component={AdminIndex} />
                 <Redirect from="/" to="/index" />
