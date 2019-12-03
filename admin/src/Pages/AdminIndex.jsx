@@ -102,7 +102,7 @@ function AdminIndex(props) {
               <Switch>
                 <Route path="/index/" exact  component={ AddArticle } />
                 <Redirect from="/" exact to="/index" />
-                <Route component={NotFound} />
+                <Redirect to="/404" />
               </Switch>
             </div>
           </div>
