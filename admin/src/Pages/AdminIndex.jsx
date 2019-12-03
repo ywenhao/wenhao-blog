@@ -10,9 +10,9 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function AdminIndex(props) {
-  const [collapsed, setCollapsed] = React.useState(false)
-  const [avatarVisible, setAvatarVisible] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(false);
+  const [avatarVisible, setAvatarVisible] = React.useState(false);
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
   };
