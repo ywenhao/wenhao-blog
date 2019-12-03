@@ -27,14 +27,14 @@ function AddArticle() {
         breaks: false,
         smartLists: true,
         smartypants: false,
-    }); 
+    });
 
     const changeContent = (e)=>{
         setArticleContent(e.target.value)
         let html=marked(e.target.value)
         setMarkdownContent(html)
     }
- 
+
     const changeIntroduce = (e)=>{
         setIntroducemd(e.target.value)
         let html=marked(e.target.value)
@@ -47,8 +47,8 @@ function AddArticle() {
                 <Col span={18}>
                     <Row gutter={10} >
                         <Col span={20}>
-                            <Input 
-                                placeholder="博客标题" 
+                            <Input
+                                placeholder="博客标题"
                                 size="large" />
                         </Col>
                         <Col span={4}>
@@ -61,9 +61,9 @@ function AddArticle() {
                     <br/>
                     <Row gutter={10} >
                         <Col span={12}>
-                            <TextArea 
+                            <TextArea
                                 value={articleContent}
-                                className="markdown-content" 
+                                className="markdown-content"
                                 rows={35}
                                 onChange={changeContent}
                                 onPressEnter={changeContent}
@@ -74,7 +74,7 @@ function AddArticle() {
                             <div
                                 className="show-html"
                                 dangerouslySetInnerHTML={{__html:markdownContent}}
-                            >                      
+                            >
                             </div>
                         </Col>
                     </Row>
@@ -90,16 +90,16 @@ function AddArticle() {
                             <br/>
                             <TextArea
                                 rows={4}
-                                value={introducemd}  
-                                onChange={changeIntroduce} 
+                                value={introducemd}
+                                onChange={changeIntroduce}
                                 onPressEnter={changeIntroduce}
                                 placeholder="文章简介"
-                            ></TextArea>
+                                />
                             <br/><br/>
                             <div
                                 className="introduce-html"
-                                dangerouslySetInnerHTML={{__html:'文章简介：' + introducehtml}}
-                            ></div>
+                                dangerouslySetInnerHTML={{__html: '文章简介：' + introducehtml}}
+                            />
                         </Col>
                         <Col span={12}>
                             <div className="date-select">
@@ -111,7 +111,7 @@ function AddArticle() {
                         </Col>
                     </Row>
                 </Col>
-            </Row> 
+            </Row>
         </div>
     )
 }
