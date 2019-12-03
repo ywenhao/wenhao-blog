@@ -1,5 +1,10 @@
 .logo {
     height: 32px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    /*font-weight: bold;*/
+    color: #ffffff;
+    line-height: 32px;
+    text-align: center;
+    font-size: 18px;
     margin: 16px;
   }
