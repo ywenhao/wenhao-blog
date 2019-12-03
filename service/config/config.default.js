@@ -51,7 +51,7 @@ module.exports = appInfo => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
   config.jwt = {
-    secret: 'abcd1234',
+    secret: 'wenHao520',
   };
 
   return {
