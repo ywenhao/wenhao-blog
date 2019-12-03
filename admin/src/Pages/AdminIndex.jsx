@@ -25,8 +25,8 @@ function AdminIndex(props) {
           message.error(res.data.data)
         }
       }
-    )
-  }
+    ).catch(()=>message.error('网络故障'))
+  };
   const avatarHandler = ({key}) => {
     if (key === 'loginOut') {
       loginOut()
