@@ -47,7 +47,7 @@ function AdminIndex(props) {
   return isLogin && (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className="logo" >你好，<em>2020</em></div>
+          <div className="logo" >你好，<em>{new Date().getFullYear()}</em></div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1">
             <Icon type="pie-chart" />
