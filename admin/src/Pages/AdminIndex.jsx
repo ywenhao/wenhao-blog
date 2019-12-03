@@ -12,6 +12,7 @@ const { SubMenu } = Menu;
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = React.useState(false)
   const [avatarVisible, setAvatarVisible] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState(false);
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
   };
@@ -34,14 +35,16 @@ function AdminIndex(props) {
   React.useEffect(() => {
     Axios(servicePath.checkLoginStatus).then(
       res => {
-        if(res.data.code === 999) {
+        if(res.data.code === 200) {
+          setIsLogin(true);
+        } else {
           message.error(res.data.data, 2, () => props.history.push('/login'));
         }
       }
-    )
-  })
+    ).catch(()=>message.error('网络故障'))
+  });
 
-  return (
+  return isLogin && (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo" />

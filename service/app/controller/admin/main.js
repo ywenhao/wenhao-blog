@@ -40,7 +40,7 @@ module.exports = app => {
         // this.ctx.session.openId = { openId };
         // this.ctx.body = { data: '登录成功', openId };
         const token = app.jwt.sign({ userName, password }, app.config.jwt.secret);
-        this.ctx.session.token = { token };
+        this.ctx.session.token = token;
         this.ctx.body = { code: 200, data: '登录成功', token };
       } else {
         this.ctx.body = { code: 999, data: '账号或密码错误' };
@@ -48,8 +48,8 @@ module.exports = app => {
     }
 
     async loginOut() {
-      this.ctx.session.token.token = '';
-      if (!this.ctx.session.token.token) {
+      this.ctx.session.token = '';
+      if (!this.ctx.session.token) {
         this.ctx.body = { code: 200, data: '退出登录成功' };
       } else {
         this.ctx.body = { code: 999, data: '退出登录失败' };
