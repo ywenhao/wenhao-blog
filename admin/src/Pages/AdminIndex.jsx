@@ -54,14 +54,14 @@ function AdminIndex(props) {
             <span>工作台</span>
           </Menu.Item>
           <Menu.Item key="2">
-            <Icon type="desktop" />
+            <Icon type="file-add" />
             <span>添加文章</span>
           </Menu.Item>
           <SubMenu
             key="sub1"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="profile" />
                 <span>文章管理</span>
               </span>
             }
@@ -70,7 +70,7 @@ function AdminIndex(props) {
             <Menu.Item key="4">文章列表</Menu.Item>
           </SubMenu>
           <Menu.Item key="9">
-            <Icon type="file" />
+            <Icon type="message" />
             <span>留言管理</span>
           </Menu.Item>
         </Menu>
