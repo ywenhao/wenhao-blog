@@ -88,7 +88,7 @@ function AdminIndex(props) {
               visible={avatarVisible}
               onVisibleChange={(e)=>setAvatarVisible(e)}
               >
-              <Avatar icon="user" style={{position: "absolute", right: '40px', top: '20px'}}/>
+              <Avatar icon="user" style={{position: "absolute", right: 40, top: 20}}/>
             </Dropdown>
         </Header>
         <Content style={{ margin: '0 16px' }}>
