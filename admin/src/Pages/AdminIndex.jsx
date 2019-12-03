@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import AddArticle from './AddArticle'
+import NotFound from './NotFound'
 import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
@@ -98,7 +99,11 @@ function AdminIndex(props) {
           </Breadcrumb>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
-              <Route path="/index/" exact  component={ AddArticle } />
+              <Switch>
+                <Route path="/index/" exact  component={ AddArticle } />
+                <Redirect from="/" exact to="/index" />
+                <Route component={NotFound} />
+              </Switch>
             </div>
           </div>
         </Content>
@@ -108,5 +113,5 @@ function AdminIndex(props) {
   );
 }
 
-export default AdminIndex;
+export default withRouter(AdminIndex);
 
