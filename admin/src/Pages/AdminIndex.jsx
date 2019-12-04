@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter, Link } from "react-router-dom";
-import AddArticle from './AddArticle'
+// import AddArticle from './AddArticle'
 import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
@@ -109,7 +109,7 @@ function AdminIndex(props) {
               <Switch>
                   {
                       routes.map(value => (
-                       <Route path={value.path} component={value.component}/>
+                       <Route path={value.path} key={value.path} component={value.component}/>
                       ))
                   }
                 <Redirect from="/" exact to="/index" />
