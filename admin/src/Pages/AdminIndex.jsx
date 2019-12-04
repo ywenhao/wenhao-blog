@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter, Link } from "react-router-dom";
 // import AddArticle from './AddArticle'
-import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, Icon, message, Dropdown, Avatar } from 'antd';
+import Breadcrumb from '../components/BreadCrumb';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
 import  servicePath  from '../config/apiUrl';
@@ -12,14 +13,15 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function AdminIndex(props) {
-  const [isLogin, setIsLogin] = React.useState(false);
-  const [collapsed, setCollapsed] = React.useState(false);
-  const [tag, setTag] = React.useState([menus[0].title]);
-  const [avatarVisible, setAvatarVisible] = React.useState(false);
-  const onCollapse = collapsed => {
+    const menuSelected = props.history.location.pathname;
+    const menuOpened = `/${menuSelected.split('/')[1]}`;
+    const [isLogin, setIsLogin] = React.useState(false);
+    const [collapsed, setCollapsed] = React.useState(false);
+    const [avatarVisible, setAvatarVisible] = React.useState(false);
+    const onCollapse = collapsed => {
     setCollapsed(collapsed);
-  };
-  const loginOut = () => {
+    };
+    const loginOut = () => {
     Axios(servicePath.checkOut).then(
       res => {
         if (res.data.code === 200) {
@@ -29,13 +31,13 @@ function AdminIndex(props) {
         }
       }
     ).catch(()=>message.error('网络故障'))
-  };
-  const avatarHandler = ({key}) => {
+    };
+    const avatarHandler = ({key}) => {
     if (key === 'loginOut') {
       loginOut()
     }
-  };
-  React.useEffect(() => {
+    };
+    React.useEffect(() => {
     Axios(servicePath.checkLoginStatus).then(
       res => {
         if(res.data.code === 200) {
@@ -47,15 +49,15 @@ function AdminIndex(props) {
     ).catch(()=>message.error('网络故障'))
   });
 
-  return isLogin && (
+    return isLogin && (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <div className="logo" >你好，<em>{new Date().getFullYear()}</em></div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu theme="dark" defaultSelectedKeys={[menuSelected]} mode="inline" defaultOpenKeys={[menuOpened]}>
             {
                 menus.map(value => {
                     return value.SubMenu?(<SubMenu
-                        key={value.key}
+                        key={value.path}
                         title={
                             <span>
                                 <Icon type={value.icon} />
@@ -65,7 +67,7 @@ function AdminIndex(props) {
                     >
                         {
                             value.children.map(v => (
-                                <Menu.Item key={v.key} onClick={()=>setTag([value.title, v.title])}>
+                                <Menu.Item key={v.path}>
                                     <Link to={v.path} >
                                         {v.title}
                                     </Link>
@@ -73,7 +75,7 @@ function AdminIndex(props) {
                             ))
                         }
                     </SubMenu>):(
-                        <Menu.Item key={value.key} onClick={()=>setTag([value.title])}>
+                        <Menu.Item key={value.path}>
                             <Link to={value.path} >
                                 <Icon type={value.icon} />
                                 <span>{value.title}</span>
@@ -101,14 +103,11 @@ function AdminIndex(props) {
             </Dropdown>
         </Header>
         <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>后台管理系统</Breadcrumb.Item>
-              {
-                  tag.map(value => (
-                      <Breadcrumb.Item>{value}</Breadcrumb.Item>
-                  ))
-              }
-          </Breadcrumb>
+          {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
+          {/*  <Breadcrumb.Item>后台管理系统</Breadcrumb.Item>*/}
+          {/*  <Breadcrumb.Item>工作台</Breadcrumb.Item>*/}
+          {/*</Breadcrumb>*/}
+          <Breadcrumb />
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
               <Switch>
@@ -126,7 +125,7 @@ function AdminIndex(props) {
         <Footer style={{ textAlign: 'center' }}>Ywenhao's Blog</Footer>
       </Layout>
     </Layout>
-  );
+    );
 }
 
 export default withRouter(AdminIndex);
