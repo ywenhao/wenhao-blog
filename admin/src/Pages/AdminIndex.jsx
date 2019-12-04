@@ -1,10 +1,12 @@
 import React from 'react';
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter, Link } from "react-router-dom";
 import AddArticle from './AddArticle'
 import { Layout, Menu, Breadcrumb, Icon, message, Dropdown, Avatar } from 'antd';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
 import  servicePath  from '../config/apiUrl';
+import  menus  from '../config/menus';
+import  routes  from '../config/routes';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -49,30 +51,36 @@ function AdminIndex(props) {
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <div className="logo" >你好，<em>{new Date().getFullYear()}</em></div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1">
-            <Icon type="pie-chart" />
-            <span>工作台</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="file-add" />
-            <span>添加文章</span>
-          </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="profile" />
-                <span>文章管理</span>
-              </span>
+            {
+                menus.map(value => {
+                    return value.SubMenu?(<SubMenu
+                        key={value.key}
+                        title={
+                            <span>
+                                <Icon type={value.icon} />
+                                <span>{value.title}</span>
+                            </span>
+                        }
+                    >
+                        {
+                            value.children.map(v => (
+                                <Menu.Item key={v.key}>
+                                    <Link to={v.path} >
+                                        {v.title}
+                                    </Link>
+                                </Menu.Item>
+                            ))
+                        }
+                    </SubMenu>):(
+                        <Menu.Item key={value.key} >
+                            <Link to={value.path} >
+                                <Icon type={value.icon} />
+                                <span>{value.title}</span>
+                            </Link>
+                        </Menu.Item>
+                    );
+                })
             }
-          >
-            <Menu.Item key="3">添加文章</Menu.Item>
-            <Menu.Item key="4">文章列表</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9">
-            <Icon type="message" />
-            <span>留言管理</span>
-          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
@@ -99,7 +107,11 @@ function AdminIndex(props) {
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
               <Switch>
-                <Route path="/index/" exact  component={ AddArticle } />
+                  {
+                      routes.map(value => (
+                       <Route path={value.path} component={value.component}/>
+                      ))
+                  }
                 <Redirect from="/" exact to="/index" />
                 <Redirect to="/404" />
               </Switch>
