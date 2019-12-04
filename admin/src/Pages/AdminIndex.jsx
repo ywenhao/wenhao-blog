@@ -14,6 +14,7 @@ const { SubMenu } = Menu;
 function AdminIndex(props) {
   const [isLogin, setIsLogin] = React.useState(false);
   const [collapsed, setCollapsed] = React.useState(false);
+  const [tag, setTag] = React.useState([menus[0].title]);
   const [avatarVisible, setAvatarVisible] = React.useState(false);
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
@@ -33,7 +34,7 @@ function AdminIndex(props) {
     if (key === 'loginOut') {
       loginOut()
     }
-  }
+  };
   React.useEffect(() => {
     Axios(servicePath.checkLoginStatus).then(
       res => {
@@ -64,7 +65,7 @@ function AdminIndex(props) {
                     >
                         {
                             value.children.map(v => (
-                                <Menu.Item key={v.key}>
+                                <Menu.Item key={v.key} onClick={()=>setTag([value.title, v.title])}>
                                     <Link to={v.path} >
                                         {v.title}
                                     </Link>
@@ -72,7 +73,7 @@ function AdminIndex(props) {
                             ))
                         }
                     </SubMenu>):(
-                        <Menu.Item key={value.key} >
+                        <Menu.Item key={value.key} onClick={()=>setTag([value.title])}>
                             <Link to={value.path} >
                                 <Icon type={value.icon} />
                                 <span>{value.title}</span>
@@ -102,7 +103,11 @@ function AdminIndex(props) {
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>后台管理系统</Breadcrumb.Item>
-            <Breadcrumb.Item>工作台</Breadcrumb.Item>
+              {
+                  tag.map(value => (
+                      <Breadcrumb.Item>{value}</Breadcrumb.Item>
+                  ))
+              }
           </Breadcrumb>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
