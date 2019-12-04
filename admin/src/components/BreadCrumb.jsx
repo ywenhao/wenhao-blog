@@ -52,7 +52,7 @@ const BreadCrumb = (props) => {
         return last ? <Link to={route.path}>{route.icon && <Icon type={route.icon} />} {route.title}</Link> : <span>{route.icon && <Icon type={route.icon} />} {route.title}</span>;
     };
     return (
-        <div className="breadCrumb">
+        <div className="breadCrumb" style={{ margin: '16px 0' }}>
             <Breadcrumb routes={routes} itemRender={itemRender} />
         </div>
     );
