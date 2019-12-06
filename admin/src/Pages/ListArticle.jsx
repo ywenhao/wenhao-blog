@@ -21,7 +21,7 @@ const ListArticle = () => {
                         <List.Item.Meta title={item.title} />
                     </List.Item>
                 )}
-           ></List>
+           />
         </div>
     )
 }
