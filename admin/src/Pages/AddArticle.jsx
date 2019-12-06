@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import marked from 'marked';
 import '../static/css/AddArticle.css';
-import { Row, Col ,Input, Select ,Button ,DatePicker } from 'antd';
+import { Row, Col ,Input, Select ,Button ,DatePicker, message } from 'antd';
 import Axios from "axios";
 import  servicePath  from '../config/apiUrl'
 
@@ -57,7 +57,11 @@ function AddArticle() {
             introducemd,
             articleContent
         }).then(res=>{
-            console.log(res)
+            if(res.data.code === 200) {
+                console.log(res.data.data)
+            } else {
+                message.error(res.data.data)
+            }
         })
     }
     return (
