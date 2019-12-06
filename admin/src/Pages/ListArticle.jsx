@@ -19,9 +19,7 @@ const ListArticle = () => {
                     <List.Item
                         key={item.id}
                     >
-                        <Link to="/artcile/add">
-                            <List.Item.Meta title={item.title} />
-                        </Link>
+                        <List.Item.Meta title={<Link to="/artcile/add">{item.title}</Link>} />
                     </List.Item>
                 )}
            />
