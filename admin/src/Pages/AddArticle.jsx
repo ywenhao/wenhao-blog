@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import marked from 'marked';
 import '../static/css/AddArticle.css';
 import { Row, Col ,Input, Select ,Button ,DatePicker } from 'antd';
+import Axios from "axios";
+import  servicePath  from '../config/apiUrl'
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -18,6 +20,12 @@ function AddArticle() {
     const [typeInfo ,setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType,setSelectType] = useState(1) //选择的文章类别
 
+    React.useEffect(() => {
+        Axios(servicePath.getTypeInfo).then(res=>{
+            setTypeInfo(res.data.data);
+            setSelectType(res.data.data[0].id);
+        })
+    }, [])
     marked.setOptions({
         renderer: marked.Renderer(),
         gfm: true,
@@ -41,6 +49,17 @@ function AddArticle() {
         setIntroducehtml(html)
     }
 
+    const submitArticle = () => {
+        Axios.post(servicePath.addArtcile, {
+            articleTitle,
+            updateDate,
+            selectedType,
+            introducemd,
+            articleContent
+        }).then(res=>{
+            console.log(res)
+        })
+    }
     return (
         <div>
             <Row gutter={5}>
@@ -49,12 +68,18 @@ function AddArticle() {
                         <Col span={20}>
                             <Input
                                 placeholder="博客标题"
-                                size="large" />
+                                size="large"
+                                onChange={e=>setArticleTitle(e.target.value)}
+                            />
                         </Col>
                         <Col span={4}>
                             &nbsp;
-                            <Select defaultValue="Sign Up" size="large">
-                                <Option value="Sign Up">视频教程</Option>
+                            <Select defaultValue={selectedType} size="large" onSelect={e=>setSelectType(e)}>
+                                {
+                                    typeInfo.map(v=>(
+                                        <Option value={v.id} key={v.id}>{v.typeName}</Option>
+                                    ))
+                                }
                             </Select>
                         </Col>
                     </Row>
@@ -83,7 +108,7 @@ function AddArticle() {
                     <Row>
                         <Col span={24}>
                             <Button  size="large">暂存文章</Button>&nbsp;
-                            <Button type="primary" size="large">发布文章</Button>
+                            <Button type="primary" size="large" onClick={submitArticle}>发布文章</Button>
                             <br/>
                         </Col>
                         <Col span={24}>
@@ -104,6 +129,7 @@ function AddArticle() {
                         <Col span={12}>
                             <div className="date-select">
                                 <DatePicker
+                                    onChange={(e, v)=>setUpdateDate(v)}
                                     placeholder="发布时间"
                                     size="large"
                                 />

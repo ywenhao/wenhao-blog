@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Row, Col, Affix, Icon, Breadcrumb } from 'antd'
+import { Row, Col, Affix, Icon, Breadcrumb, Spin } from 'antd'
 import ReactMarkdown from 'react-markdown'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -17,7 +17,11 @@ import Tocify from '../components/tocify.tsx'
 import  servicePath  from '../config/apiUrl'
 
 const Detailed = (props) => {
-    let articleContent=props.article_content
+    const [isSpinning, setIsSpinng] = React.useState(true);
+    let articleContent = props.article_content
+    React.useEffect(() => {
+        articleContent && setIsSpinng(false)
+    }, [articleContent])
     const tocify = new Tocify()
     const renderer = new marked.Renderer();
       renderer.heading = function(text, level, raw) {
@@ -66,10 +70,12 @@ const Detailed = (props) => {
                                 <span><Icon type="fire"/> {props.view_count}人</span>
                             </div>
                             <div className="detailed-content">
-                                <ReactMarkdown
-                                    source={markdown}
-                                    escapeHtml={false}
-                                />
+                                <Spin spinning={isSpinning} tip="Loading...">
+                                    <ReactMarkdown
+                                        source={markdown}
+                                        escapeHtml={false}
+                                    />
+                                </Spin>
                             </div>
                         </div>
                     </div>
