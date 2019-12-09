@@ -10,6 +10,7 @@ const servicePath = {
     checkLoginStatus: admin + 'index', // 检查登录状态
     checkLogin: admin + 'checkLogin',  //  检查用户名密码是否正确
     checkOut: admin + 'loginOut',
-    addArtcile: admin + 'addArtcile',
+    addArticle: admin + 'addArticle',
+    delArticle: admin + 'delArticle',
 };
 export default servicePath;

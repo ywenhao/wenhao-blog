@@ -65,7 +65,7 @@ const Detailed = (props) => {
                                 React实战视频教程-技术胖Blog开发(更新08集)
                             </div>
                             <div className="list-icon center">
-                                <span><Icon type="calendar"/>{props.addTime.replace('T',' ').replace('.000Z', '')}</span>
+                                <span><Icon type="calendar"/>{props.addTime}</span>
                                 <span><Icon type="folder"/> {props.typeName}</span>
                                 <span><Icon type="fire"/> {props.view_count}人</span>
                             </div>

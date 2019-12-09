@@ -14,18 +14,20 @@ class HomeController extends Controller {
       sql = 'SELECT article.id as id,' +
           'article.title as title,' +
           'article.introduce as introduce,' +
-          'article.addTime as addTime,' +
+          'DATE_FORMAT(article.addTime, "%Y-%m-%d") as addTime,' +
+          'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
           'article.view_count as view_count ,' +
           'type.typeName as typeName ' +
-          'FROM article LEFT JOIN type ON article.type_id = type.id WHERE title LIKE "%' + keyword + '%" OR introduce LIKE "%' + keyword + '%" OR article_content LIKE "%' + keyword + '%" ORDER BY addTime DESC';
+          'FROM article LEFT JOIN type ON article.type_id = type.id WHERE title LIKE "%' + keyword + '%" OR introduce LIKE "%' + keyword + '%" OR article_content LIKE "%' + keyword + '%" ORDER BY updateTime DESC';
     } else {
       sql = 'SELECT article.id as id,' +
           'article.title as title,' +
           'article.introduce as introduce,' +
-          'article.addTime as addTime,' +
+          'DATE_FORMAT(article.addTime, "%Y-%m-%d") as addTime,' +
+          'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
           'article.view_count as view_count ,' +
           'type.typeName as typeName ' +
-          'FROM article LEFT JOIN type ON article.type_id = type.id';
+          'FROM article LEFT JOIN type ON article.type_id = type.id ORDER BY updateTime DESC';
     }
     const resList = await this.app.mysql.query(sql);
     const resType = await this.app.mysql.select('type');
@@ -43,8 +45,8 @@ class HomeController extends Controller {
     'article.title as title,' +
     'article.introduce as introduce,' +
     'article.article_content as article_content,' +
-    // "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime," +
-    'article.addTime as addTime,' +
+    'DATE_FORMAT(article.addTime, "%Y-%m-%d") as addTime,' +
+    'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
     'article.view_count as view_count ,' +
     'type.typeName as typeName ,' +
     'type.id as typeId ' +
@@ -69,7 +71,8 @@ class HomeController extends Controller {
     const sql = 'SELECT article.id as id,' +
         'article.title as title,' +
         'article.introduce as introduce,' +
-        'article.addTime as addTime,' +
+        'DATE_FORMAT(article.addTime, "%Y-%m-%d") as addTime,' +
+        'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
         'article.view_count as view_count ,' +
         'type.typeName as typeName ' +
         'FROM article LEFT JOIN type ON article.type_id = type.id ' +

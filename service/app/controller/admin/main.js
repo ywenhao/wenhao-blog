@@ -8,21 +8,37 @@ class MainController extends Controller {
     // const result = app.jwt.verify(this.ctx.session.token, app.config.jwt.secret);
     // console.log(result.userName);
   }
-  async addArtcile() {
+  async addArticle() {
+    const articleId = this.ctx.request.body.articleId;
     const type_id = this.ctx.request.body.selectedType;
     const title = this.ctx.request.body.articleTitle;
     const introduce = this.ctx.request.body.introducemd;
     const article_content = this.ctx.request.body.articleContent;
-    const addTime = this.ctx.request.body.updateDate;
-    const sql = `INSERT INTO article(type_id, title, introduce, article_content, addTime) VALUES (${type_id}, '${title}', '${introduce}', '${article_content}', '${addTime}')`;
+    const addTime = this.ctx.request.body.showDate;
+    const update_time = this.ctx.request.body.updateDate;
+    let sql;
+    if (articleId) {
+      sql = `UPDATE article SET type_id = ${type_id}, title = '${title}', introduce = '${introduce}', article_content = '${article_content}', update_time = '${update_time}' WHERE id = ${articleId}`;
+    } else {
+      sql = `INSERT INTO article(type_id, title, introduce, article_content, addTime) VALUES (${type_id}, '${title}', '${introduce}', '${article_content}', '${addTime}')`;
+    }
     const res = await this.app.mysql.query(sql);
     if (res.affectedRows > 0) {
-      this.ctx.body = { code: 200, data: '添加成功' };
+      this.ctx.body = { code: 200, data: '操作成功' };
     } else {
-      this.ctx.body = { code: 999, data: '添加失败' };
+      this.ctx.body = { code: 999, data: '操作失败' };
     }
   }
-
+  async delArticle() {
+    const id = this.ctx.request.body.id;
+    const sql = `DELETE FROM article WHERE id = ${id}`;
+    const results = await this.app.mysql.query(sql);
+    if (results.affectedRows > 0) {
+      this.ctx.body = { code: 200, data: '操作成功' };
+    } else {
+      this.ctx.body = { code: 999, data: '操作失败' };
+    }
+  }
   async checkLogin() {
     const userName = this.ctx.request.body.userName;
     const password = this.ctx.request.body.password;

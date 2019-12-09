@@ -52,7 +52,7 @@ const Home = (res) => {
               </Link>
             </div>
             <div className="list-icon">
-              <span><Icon type="calendar" />{item.addTime.replace('T',' ').replace('.000Z', '')}</span>
+              <span><Icon type="calendar" />{item.addTime}</span>
               <span><Icon type="folder" /> {item.typeName}</span>
               <span><Icon type="fire" />{item.view_count}人</span>
             </div>
