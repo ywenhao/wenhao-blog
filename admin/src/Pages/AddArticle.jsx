@@ -59,7 +59,6 @@ function AddArticle() {
     }
 
     const submitArticle = () => {
-        console.log(showDate)
         articleTitle && introducemd && articleContent?
         Axios.post(servicePath.addArticle, {
             articleId,
@@ -70,7 +69,7 @@ function AddArticle() {
             articleContent
         }).then(res=>{
             if(res.data.code === 200) {
-                // message.success(res.data.data, 2, () => window.location.href = '/article/list')
+                message.success(res.data.data, 2, () => window.location.href = '/article/list')
             } else {
                 message.error(res.data.data)
             }
