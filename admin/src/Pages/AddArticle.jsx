@@ -55,6 +55,7 @@ function AddArticle() {
             articleContent
         };
         sessionStorage.setItem('articleData', JSON.stringify(articleData));
+        message.success('暂存成功');
     };
     const tempSave = () => {
         articleTitle && introducemd && articleContent?

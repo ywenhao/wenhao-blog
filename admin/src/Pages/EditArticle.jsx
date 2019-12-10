@@ -25,8 +25,8 @@ function EditArticle(props) {
 
     React.useEffect(() => {
         const articleData = sessionStorage.getItem('articleData');
-        if (articleData) {
-            const data = articleData && JSON.parse(articleData);
+        const data = articleData && JSON.parse(articleData);
+        if (articleData && data.articleId === articleId) {
             setSelectType(data.typeId);
             setArticleTitle(data.articleTitle);
             setUpdateDate(data.updateDate || data.showDate);
@@ -34,6 +34,7 @@ function EditArticle(props) {
             setIntroducehtml(marked(data.introducemd));
             setArticleContent(data.articleContent);
             setMarkdownContent(marked(data.articleContent));
+            message.success('读取缓存成功', 1)
         } else {
             Axios(servicePath.getTypeInfo).then(res=>{
                 setTypeInfo(res.data.data);
@@ -71,6 +72,7 @@ function EditArticle(props) {
             articleContent
         };
         sessionStorage.setItem('articleData', JSON.stringify(articleData));
+        message.success('暂存成功');
     };
     const tempSave = () => {
         articleTitle && introducemd && articleContent?
