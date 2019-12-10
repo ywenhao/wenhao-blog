@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter, Link } from "react-router-dom";
 // import AddArticle from './AddArticle'
-import { Layout, Menu, Icon, message, Dropdown, Avatar, BackTop } from 'antd';
+import { Layout, Menu, Icon, message, Dropdown, Avatar } from 'antd';
 import Breadcrumb from '../components/BreadCrumb';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
@@ -122,7 +122,6 @@ function AdminIndex(props) {
             </div>
           </div>
         </Content>
-          <BackTop className="top">Top</BackTop>
         <Footer style={{ textAlign: 'center' }}>Ywenhao's Blog</Footer>
       </Layout>
     </Layout>

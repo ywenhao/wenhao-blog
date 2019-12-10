@@ -24,22 +24,32 @@ function EditArticle(props) {
     const [selectedType,setSelectType] = useState(1) //选择的文章类别
 
     React.useEffect(() => {
-        Axios(servicePath.getTypeInfo).then(res=>{
-            setTypeInfo(res.data.data);
-        });
-        // Axios(servicePath.getArticleById).then(res => {
-        //
-        // })
-       Axios(servicePath.getArticleById + articleId).then(res=> {
-           const data = res.data.data[0];
-           setSelectType(data.typeId);
-           setArticleTitle(data.title);
-           setIntroducemd(data.introduce);
-           setUpdateDate(data.updateTime);
-           setIntroducehtml(marked(data.introduce));
-           setArticleContent(data.article_content);
-           setMarkdownContent(marked(data.article_content));
-       })
+        const articleData = sessionStorage.getItem('articleData');
+        if (articleData) {
+            const data = articleData && JSON.parse(articleData);
+            setSelectType(data.typeId);
+            setArticleTitle(data.articleTitle);
+            setUpdateDate(data.updateDate || data.showDate);
+            setIntroducemd(data.introducemd);
+            setIntroducehtml(marked(data.introducemd));
+            setArticleContent(data.articleContent);
+            setMarkdownContent(marked(data.articleContent));
+        } else {
+            Axios(servicePath.getTypeInfo).then(res=>{
+                setTypeInfo(res.data.data);
+            });
+
+            Axios(servicePath.getArticleById + articleId).then(res=> {
+                const data = res.data.data[0];
+                setSelectType(data.typeId);
+                setArticleTitle(data.title);
+                setIntroducemd(data.introduce);
+                setUpdateDate(data.updateTime);
+                setIntroducehtml(marked(data.introduce));
+                setArticleContent(data.article_content);
+                setMarkdownContent(marked(data.article_content));
+            })
+        }
     }, [articleId]);
     marked.setOptions({
         renderer: marked.Renderer(),
@@ -51,7 +61,22 @@ function EditArticle(props) {
         smartLists: true,
         smartypants: false,
     });
-
+    const saveData = () => {
+        const articleData = {
+            articleId,
+            articleTitle,
+            updateDate,
+            selectedType,
+            introducemd,
+            articleContent
+        };
+        sessionStorage.setItem('articleData', JSON.stringify(articleData));
+    };
+    const tempSave = () => {
+        articleTitle && introducemd && articleContent?
+            saveData():
+            message.error('部分内容未填写');
+    };
     const changeContent = (e)=>{
         setArticleContent(e.target.value)
         let html=marked(e.target.value)
@@ -128,7 +153,7 @@ function EditArticle(props) {
                 <Col span={6}>
                     <Row>
                         <Col span={24}>
-                            <Button  size="large">暂存文章</Button>&nbsp;
+                            <Button  size="large" onClick={tempSave}>暂存文章</Button>&nbsp;
                             <Button type="primary" size="large" onClick={submitArticle}>发布文章</Button>
                             <br/>
                         </Col>

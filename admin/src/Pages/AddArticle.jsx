@@ -34,7 +34,7 @@ function AddArticle() {
             setTypeInfo(res.data.data);
             setSelectType(res.data.data[0].id);
         })
-    }, [])
+    }, []);
     marked.setOptions({
         renderer: marked.Renderer(),
         gfm: true,
@@ -45,7 +45,22 @@ function AddArticle() {
         smartLists: true,
         smartypants: false,
     });
-
+    const saveData = () => {
+        const articleData = {
+            articleId,
+            articleTitle,
+            showDate,
+            selectedType,
+            introducemd,
+            articleContent
+        };
+        sessionStorage.setItem('articleData', JSON.stringify(articleData));
+    };
+    const tempSave = () => {
+        articleTitle && introducemd && articleContent?
+            saveData():
+            message.error('部分内容未填写');
+    };
     const changeContent = (e)=>{
         setArticleContent(e.target.value)
         let html=marked(e.target.value)
@@ -122,7 +137,7 @@ function AddArticle() {
                 <Col span={6}>
                     <Row>
                         <Col span={24}>
-                            <Button  size="large">暂存文章</Button>&nbsp;
+                            <Button  size="large" onClick={tempSave}>暂存文章</Button>&nbsp;
                             <Button type="primary" size="large" onClick={submitArticle}>发布文章</Button>
                             <br/>
                         </Col>

@@ -46,6 +46,7 @@ const ListArticle = (props) => {
             <Search placeholder="请输入搜索关键字" onSearch={onSearch} style={{ width: 200 }}/>
            <List
                 dataSource={articleList}
+                pagination={{position: 'bottom'}}
                 renderItem={item => (
                     <List.Item
                         key={item.id}
