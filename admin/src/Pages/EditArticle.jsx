@@ -103,7 +103,7 @@ function EditArticle(props) {
             articleContent
         }).then(res=>{
             if(res.data.code === 200) {
-                message.success(res.data.data, 2, () => window.location.href = '/article/list')
+                message.success(res.data.data, 1, () => window.location.href = '/article/list')
             } else {
                 message.error(res.data.data)
             }
