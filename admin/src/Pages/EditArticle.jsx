@@ -27,9 +27,10 @@ function EditArticle(props) {
         const articleData = sessionStorage.getItem('articleData');
         const data = articleData && JSON.parse(articleData);
         if (articleData && data.articleId === articleId) {
-            setSelectType(data.typeId);
+            setSelectType(data.selectedType);
+            setTypeInfo(data.typeInfo);
             setArticleTitle(data.articleTitle);
-            setUpdateDate(data.updateDate || data.showDate);
+            setUpdateDate(data.updateDate);
             setIntroducemd(data.introducemd);
             setIntroducehtml(marked(data.introducemd));
             setArticleContent(data.articleContent);
@@ -65,6 +66,7 @@ function EditArticle(props) {
     const saveData = () => {
         const articleData = {
             articleId,
+            typeInfo,
             articleTitle,
             updateDate,
             selectedType,

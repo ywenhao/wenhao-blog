@@ -29,11 +29,25 @@ function AddArticle() {
         setShowDate(`${year}-${month}-${day}`);
     }
     React.useEffect(() => {
-        getDate();
-        Axios(servicePath.getTypeInfo).then(res=>{
-            setTypeInfo(res.data.data);
-            setSelectType(res.data.data[0].id);
-        })
+        const articleData = sessionStorage.getItem('articleData');
+        const data = articleData && JSON.parse(articleData);
+        if (articleData && data.articleId === 0) {
+            setSelectType(data.selectedType);
+            setTypeInfo(data.typeInfo);
+            setArticleTitle(data.articleTitle);
+            setShowDate(data.showDate);
+            setIntroducemd(data.introducemd);
+            setIntroducehtml(marked(data.introducemd));
+            setArticleContent(data.articleContent);
+            setMarkdownContent(marked(data.articleContent));
+            message.success('读取缓存成功', 1)
+        } else {
+            getDate();
+            Axios(servicePath.getTypeInfo).then(res=>{
+                setTypeInfo(res.data.data);
+                setSelectType(res.data.data[0].id);
+            })
+        }
     }, []);
     marked.setOptions({
         renderer: marked.Renderer(),
@@ -50,6 +64,7 @@ function AddArticle() {
             articleId,
             articleTitle,
             showDate,
+            typeInfo,
             selectedType,
             introducemd,
             articleContent
@@ -98,6 +113,7 @@ function AddArticle() {
                     <Row gutter={10} >
                         <Col span={20}>
                             <Input
+                                value={articleTitle}
                                 placeholder="博客标题"
                                 size="large"
                                 onChange={e=>setArticleTitle(e.target.value)}
