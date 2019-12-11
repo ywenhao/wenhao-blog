@@ -11,7 +11,7 @@ const Header = () => {
     const [ navArray , setNavArray ] = React.useState([]);
     //跳转到列表页
     const handleClick = (e)=> {
-        if(e.key == 0){
+        if(e.key === 0){
             Router.push('/index')
         }else{
             Router.push('/list?id='+e.key)
@@ -40,7 +40,11 @@ const Header = () => {
             <div className="header">
                 <Row type="flex" justify="center">
                     <Col xs={24} sm={24} md={10} lg={15} xl={12}>
-                        <span className="header-logo">Ywenhao</span>
+                        <Link href="/index">
+                            <a>
+                                <span className="header-logo">Ywenhao</span>
+                            </a>
+                        </Link>
                         <span className="header-txt">一个前端Boy</span>
                     </Col>
                     <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={7}>
