@@ -84,3 +84,7 @@ iframe{
 .ant-anchor-wrapper{
     padding: 5px !important;
 }
+.ant-spin-nested-loading > div > .ant-spin {
+    max-height: none;
+    position: fixed;
+}
