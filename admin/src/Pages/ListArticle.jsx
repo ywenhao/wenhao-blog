@@ -22,7 +22,8 @@ const ListArticle = (props) => {
             onOk() {
                 Axios.post(servicePath.delArticle, { id }).then(res => {
                     if (res.data.code === 200) {
-                        message.success(res.data.data, 2, onSearch)
+                        message.success(res.data.data)
+                        onSearch()
                     } else {
                         message.error((res.data.data))
                     }
