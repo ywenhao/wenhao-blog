@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Row, Col, List, Icon, BackTop, Input } from 'antd'
+import { Row, Col, List, Icon, Input } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Author from '../components/Author'
@@ -98,7 +98,6 @@ const Home = (res) => {
         <Advert/>
       </Col>
     </Row>
-      <BackTop />
       <Footer />
   </>
 )};
