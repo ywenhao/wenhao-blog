@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Row, Col, List, Icon, BackTop } from 'antd'
+import { Row, Col, List, Icon, BackTop, Input } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Author from '../components/Author'
@@ -12,10 +12,23 @@ import  servicePath  from '../config/apiUrl'
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
+const { Search } = Input;
 
 const Home = (res) => {
-  const [ myList , setMyList ] = React.useState(res.list);
-  const [ type , setType ] = React.useState(res.type);
+    const [ myList , setMyList ] = React.useState(res.list);
+    const [ type , setType ] = React.useState(res.type);
+    const onSearch = (e) => {
+        Axios(servicePath.getArticleList, {
+            params: {
+                keyword: e,
+            }
+        }).then(res => {
+            if (res.data.code ===200)
+                setMyList(res.data.list);
+            else
+                message.error(res.data.data);
+        })
+    };
     const renderer = new marked.Renderer();
     marked.setOptions({
         renderer: renderer,
@@ -42,7 +55,16 @@ const Home = (res) => {
       <div>
 
               <List
-                header={<div>最新日志</div>}
+                header={
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <div>
+                            最新日志
+                        </div>
+                        <div>
+                            <Search style={{width: 200}} placeholder="搜索文章" onSearch={onSearch} />
+                        </div>
+                    </div>
+                }
                 itemLayout="vertical"
                 dataSource={myList}
                 renderItem={item => (

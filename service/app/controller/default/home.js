@@ -18,7 +18,7 @@ class HomeController extends Controller {
           'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
           'article.view_count as view_count ,' +
           'type.typeName as typeName ' +
-          'FROM article LEFT JOIN type ON article.type_id = type.id WHERE title LIKE "%' + keyword + '%" OR introduce LIKE "%' + keyword + '%" OR article_content LIKE "%' + keyword + '%" ORDER BY updateTime DESC';
+          'FROM article LEFT JOIN type ON article.type_id = type.id WHERE title LIKE "%' + keyword + '%" OR introduce LIKE "%' + keyword + '%" OR article_content LIKE "%' + keyword + '%" ORDER BY updateTime DESC, id ASC';
     } else {
       sql = 'SELECT article.id as id,' +
           'article.title as title,' +
@@ -27,7 +27,7 @@ class HomeController extends Controller {
           'DATE_FORMAT(article.update_time, "%Y-%m-%d") as updateTime,' +
           'article.view_count as view_count ,' +
           'type.typeName as typeName ' +
-          'FROM article LEFT JOIN type ON article.type_id = type.id ORDER BY updateTime DESC';
+          'FROM article LEFT JOIN type ON article.type_id = type.id ORDER BY updateTime DESC, id ASC';
     }
     const resList = await this.app.mysql.query(sql);
     const resType = await this.app.mysql.select('type');
