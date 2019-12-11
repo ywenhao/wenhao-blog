@@ -100,6 +100,7 @@ function AddArticle() {
             articleContent
         }).then(res=>{
             if(res.data.code === 200) {
+                sessionStorage.clear();
                 message.success(res.data.data, 1, () => window.location.href = '/article/list')
             } else {
                 message.error(res.data.data)
