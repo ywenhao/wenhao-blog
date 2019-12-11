@@ -58,3 +58,7 @@ code {
     margin:8px  auto ;
 
 }
+.loading-container {
+    width: 100%;
+    text-align: center;
+}

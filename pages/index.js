@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Row, Col, List , Icon } from 'antd'
+import { Row, Col, List, Icon, BackTop } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Author from '../components/Author'
@@ -40,33 +40,34 @@ const Home = (res) => {
     <Row className="comm-main" type="flex" justify="center">
       <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
       <div>
-      <List
-        header={<div>最新日志</div>}
-        itemLayout="vertical"
-        dataSource={myList}
-        renderItem={item => (
-          <List.Item>
-            <div className="list-title">
-              <Link href={{pathname:'/detailed',query:{id: item.id}}}>
-                <a>{item.title}</a>
-              </Link>
-            </div>
-            <div className="list-icon">
-              <span><Icon type="calendar" />{item.addTime}</span>
-              <span><Icon type="folder" /> {item.typeName}</span>
-              <span><Icon type="fire" />{item.view_count}人</span>
-            </div>
-              <div className="list-context"
-                   dangerouslySetInnerHTML={{__html:marked(item.introduce)}}
+
+              <List
+                header={<div>最新日志</div>}
+                itemLayout="vertical"
+                dataSource={myList}
+                renderItem={item => (
+                  <List.Item>
+                    <div className="list-title">
+                      <Link href={{pathname:'/detailed',query:{id: item.id}}}>
+                        <a>{item.title}</a>
+                      </Link>
+                    </div>
+                    <div className="list-icon">
+                      <span><Icon type="calendar" />{item.addTime}</span>
+                      <span><Icon type="folder" /> {item.typeName}</span>
+                      <span><Icon type="fire" />{item.view_count}人</span>
+                    </div>
+                      <div className="list-context"
+                           dangerouslySetInnerHTML={{__html:marked(item.introduce)}}
+                      />
+                    <div className="list-more">
+                      <Link href={{pathname:'/detailed',query:{id: item.id}}}>
+                        <a>阅读全文 >>> </a>
+                      </Link>
+                    </div>
+                  </List.Item>
+                )}
               />
-            <div className="list-more">
-              <Link href={{pathname:'/detailed',query:{id: item.id}}}>
-                <a>阅读全文 >>> </a>
-              </Link>
-            </div>
-          </List.Item>
-        )}
-      />
     </div>
       </Col>
 
@@ -75,6 +76,7 @@ const Home = (res) => {
         <Advert/>
       </Col>
     </Row>
+      <BackTop />
       <Footer />
   </>
 )}
@@ -84,8 +86,8 @@ Home.getInitialProps = async () => {
     Axios(servicePath.getArticleList).then( res => {
       resolve(res.data)
     })
-  })
+  });
   return await promise
-}
+};
 
 export default Home
