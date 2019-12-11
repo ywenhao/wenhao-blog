@@ -28,7 +28,7 @@ const Workbench = () => {
     return (
         <div>
             <Card title="折线图表之一">
-                <ReactEcharts option={option} theme="Imooc"  style={{height:'400px'}}/>
+                <ReactEcharts option={option} theme="Imooc" lazyUpdate={true} notMerge={true} style={{height:'400px'}}/>
             </Card>
         </div>
     )
