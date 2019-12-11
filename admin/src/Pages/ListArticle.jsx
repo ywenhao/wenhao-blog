@@ -31,12 +31,12 @@ const ListArticle = (props) => {
         });
     };
     const onSearch = value => {
-        setCurrent(1);
         Axios(servicePath.getArticleList, {
             params: {
                 keyword: value,
             }
         }).then(res => {
+            setCurrent(1);
             setArticleList(res.data.list);
         })
     };
