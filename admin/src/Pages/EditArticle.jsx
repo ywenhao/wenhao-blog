@@ -171,9 +171,10 @@ function EditArticle(props) {
                                 placeholder="文章简介"
                                 />
                             <br/><br/>
+                            <div>文章简介：</div>
                             <div
                                 className="introduce-html"
-                                dangerouslySetInnerHTML={{__html: '文章简介：' + introducehtml}}
+                                dangerouslySetInnerHTML={{__html: introducehtml}}
                             />
                         </Col>
                         <Col span={12}>
