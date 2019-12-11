@@ -79,7 +79,7 @@ const Home = (res) => {
       <BackTop />
       <Footer />
   </>
-)}
+)};
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
