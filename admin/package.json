@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.25.1",
+    "echarts-for-react": "^2.0.15-beta.1",
     "http-proxy-middleware": "^0.20.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

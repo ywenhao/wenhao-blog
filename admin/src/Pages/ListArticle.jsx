@@ -9,6 +9,7 @@ const { confirm } = Modal;
 
 const ListArticle = (props) => {
     const [articleList, setArticleList] = React.useState([]);
+    const [current, setCurrent] = React.useState(1);
     const editHandler = (id) => {
         props.history.push('/article/edit/' + id);
     };
@@ -30,6 +31,7 @@ const ListArticle = (props) => {
         });
     };
     const onSearch = value => {
+        setCurrent(1);
         Axios(servicePath.getArticleList, {
             params: {
                 keyword: value,
@@ -46,7 +48,7 @@ const ListArticle = (props) => {
             <Search placeholder="请输入搜索关键字" onSearch={onSearch} style={{ width: 200 }}/>
            <List
                 dataSource={articleList}
-                pagination={{position: 'bottom'}}
+                pagination={{position: 'bottom', current, onChange: (e)=> setCurrent(e) }}
                 renderItem={item => (
                     <List.Item
                         key={item.id}
