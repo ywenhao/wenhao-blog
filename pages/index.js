@@ -23,7 +23,7 @@ const Home = (res) => {
                 keyword: e,
             }
         }).then(res => {
-            if (res.data.code ===200)
+            if (res.data.code === 200)
                 setMyList(res.data.list);
             else
                 message.error(res.data.data);
