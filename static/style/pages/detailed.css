@@ -88,3 +88,9 @@ iframe{
     max-height: none;
     position: fixed;
 }
+.anchor-fix {
+    color: #000000;
+}
+.anchor-fix:hover {
+    color: #551A8B;
+}

@@ -24,9 +24,10 @@ const Detailed = (props) => {
     }, [articleContent])
     const tocify = new Tocify()
     const renderer = new marked.Renderer();
-      renderer.heading = function(text, level, raw) {
+      renderer.heading = function(text, level) {
         const anchor = tocify.add(text, level);
-        return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+        return `<h${level}><a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}</a></h${level}>`;
+        // return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
       };
 
     marked.setOptions({
@@ -42,7 +43,6 @@ const Detailed = (props) => {
             return hljs.highlightAuto(code).value;
         }
     });
-
     let markdown = marked(props.article_content);
     return (
         <>
