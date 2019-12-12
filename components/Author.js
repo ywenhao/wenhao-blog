@@ -11,8 +11,12 @@ const Author = () => {
                 <Tooltip placement="top" title="https://github.com/ywenhao">
                     <Avatar size={28} icon="github" className="account" />
                 </Tooltip>
-                <Avatar size={28} icon="qq"  className="account" />
-                <Avatar size={28} icon="wechat"  className="account"  />
+                <Tooltip placement="top" title="QQ">
+                    <Avatar size={28} icon="qq"  className="account" />
+                </Tooltip>
+                <Tooltip placement="top" title="Wechact">
+                    <Avatar size={28} icon="wechat"  className="account"  />
+                </Tooltip>
             </div>
         </div>
     )
