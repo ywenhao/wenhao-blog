@@ -16,7 +16,7 @@ const { Search } = Input;
 
 const Home = (res) => {
     const [ myList , setMyList ] = React.useState(res.list);
-    const [ type , setType ] = React.useState(res.type);
+    const [ type ] = React.useState(res.type);
     const onSearch = (e) => {
         Axios(servicePath.getArticleList, {
             params: {
