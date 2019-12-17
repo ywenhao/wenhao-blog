@@ -11,7 +11,7 @@ const Header = () => {
     const [ navArray , setNavArray ] = React.useState([]);
     //跳转到列表页
     const handleClick = (e)=> {
-        if(e.key === 0){
+        if(e.key == 0) {
             Router.push('/index')
         }else{
             Router.push('/list?id='+e.key)
