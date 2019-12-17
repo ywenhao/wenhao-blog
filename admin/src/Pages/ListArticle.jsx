@@ -32,7 +32,6 @@ const ListArticle = (props) => {
         });
     };
     const onSearch = value => {
-        console.log(value)
         Axios(servicePath.getArticleList, {
             params: {
                 keyword: value,
