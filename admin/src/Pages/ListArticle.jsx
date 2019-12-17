@@ -32,6 +32,7 @@ const ListArticle = (props) => {
         });
     };
     const onSearch = value => {
+        console.log(value)
         Axios(servicePath.getArticleList, {
             params: {
                 keyword: value,
@@ -46,7 +47,7 @@ const ListArticle = (props) => {
     }, []);
     return (
         <div>
-            <Search placeholder="请输入搜索关键字" onSearch={onSearch} style={{ width: 200 }}/>
+            <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200 }}/>
            <List
                 dataSource={articleList}
                 pagination={{position: 'bottom', current, onChange: (e)=> setCurrent(e) }}
