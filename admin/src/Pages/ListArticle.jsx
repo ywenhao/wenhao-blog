@@ -1,7 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import servicePath from '../config/apiUrl'
-import { List, Input, Button, message, Modal } from 'antd';
+import { List, Input, Button, message, Modal, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import '../static/css/ListArticle.css';
 const { Search } = Input;
@@ -46,24 +46,86 @@ const ListArticle = (props) => {
     }, []);
     return (
         <div>
-            <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200 }}/>
-           <List
-                dataSource={articleList}
+             <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200 }}/>
+             <List
+                header={
+                    <Row className="list-div">
+                        <Col span={8}>
+                            <b>标题</b>
+                        </Col>
+                        <Col span={3}>
+                            <b>类别</b>
+                        </Col>
+                        <Col span={3}>
+                            <b>发布时间</b>
+                        </Col>
+                        <Col span={3}>
+                            <b>集数</b>
+                        </Col>
+                        <Col span={3}>
+                            <b>浏览量</b>
+                        </Col>
+
+                        <Col span={4}>
+                            <b>操作</b>
+                        </Col>
+                    </Row>
+
+                }
+                bordered
                 pagination={{position: 'bottom', current, onChange: (e)=> setCurrent(e) }}
+                dataSource={articleList}
                 renderItem={item => (
-                    <List.Item
-                        key={item.id}
-                    >
-                        <List.Item.Meta title={<Link to={"/article/edit/"+ item.id}>{item.title}<span style={{position:"absolute",left: '20%'}}>{item.updateTime}</span></Link>} />
-                        <div className="list-item-btn">
-                            <Button icon="edit" type="primary" onClick={() => editHandler(item.id)}/>
-                            <Button icon="delete" type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
-                        </div>
+                    <List.Item>
+                        <Row className="list-div">
+                            <Col span={8}>
+                                {item.title}
+                            </Col>
+                            <Col span={3}>
+                             {item.typeName}
+                            </Col>
+                            <Col span={3}>
+                                {item.addTime}
+                            </Col>
+                            <Col span={3}>
+                                共<span>{item.part_count}</span>集
+                            </Col>
+                            <Col span={3}>
+                              {item.view_count}
+                            </Col>
+
+                            <Col span={4}>
+                                <Button icon="edit" type="primary" onClick={() => editHandler(item.id)}/>
+                                <Button icon="delete" type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
+                            </Col>
+                        </Row>
+
                     </List.Item>
                 )}
-           />
+                />
+
         </div>
     )
+    // return (
+    //     <div>
+    //         <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200 }}/>
+    //        <List
+    //             dataSource={articleList}
+    //             pagination={{position: 'bottom', current, onChange: (e)=> setCurrent(e) }}
+    //             renderItem={item => (
+    //                 <List.Item
+    //                     key={item.id}
+    //                 >
+    //                     <List.Item.Meta title={<Link to={"/article/edit/"+ item.id}>{item.title}<span style={{position:"absolute",left: '20%'}}>{item.updateTime}</span></Link>} />
+    //                     <div className="list-item-btn">
+    //                         <Button icon="edit" type="primary" onClick={() => editHandler(item.id)}/>
+    //                         <Button icon="delete" type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
+    //                     </div>
+    //                 </List.Item>
+    //             )}
+    //        />
+    //     </div>
+    // )
 };
 
 export default ListArticle;
