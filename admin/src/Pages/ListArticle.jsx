@@ -53,19 +53,15 @@ const ListArticle = (props) => {
                         <Col span={8}>
                             <b>标题</b>
                         </Col>
-                        <Col span={3}>
+                        <Col span={4}>
                             <b>类别</b>
                         </Col>
-                        <Col span={3}>
+                        <Col span={4}>
                             <b>发布时间</b>
                         </Col>
-                        <Col span={3}>
-                            <b>集数</b>
-                        </Col>
-                        <Col span={3}>
+                        <Col span={4}>
                             <b>浏览量</b>
                         </Col>
-
                         <Col span={4}>
                             <b>操作</b>
                         </Col>
@@ -79,31 +75,27 @@ const ListArticle = (props) => {
                     <List.Item>
                         <Row className="list-div">
                             <Col span={8}>
-                                {item.title}
+                                <Link to={"/article/edit/"+ item.id}>
+                                    {item.title}
+                                </Link>
                             </Col>
-                            <Col span={3}>
+                            <Col span={4}>
                              {item.typeName}
                             </Col>
-                            <Col span={3}>
+                            <Col span={4}>
                                 {item.addTime}
                             </Col>
-                            <Col span={3}>
-                                共<span>{item.part_count}</span>集
-                            </Col>
-                            <Col span={3}>
+                            <Col span={4}>
                               {item.view_count}
                             </Col>
-
                             <Col span={4}>
                                 <Button icon="edit" type="primary" onClick={() => editHandler(item.id)}/>
                                 <Button icon="delete" type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
                             </Col>
                         </Row>
-
                     </List.Item>
                 )}
                 />
-
         </div>
     )
     // return (
