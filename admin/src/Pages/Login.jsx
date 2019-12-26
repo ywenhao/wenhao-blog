@@ -63,6 +63,7 @@ function Login(props) {
                         placeholder="Enter your password"
                         prefix={<Icon type="key" style={{color:'rgba(0,0,0,.25)'}} />}
                         onChange={(e)=>{setPassword(e.target.value)}}
+                        onPressEnter={checkLogin}
                     />
                     <br/><br/>
                     <Button type="primary" size="large" block onClick={checkLogin} > Login in </Button>
