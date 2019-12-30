@@ -46,7 +46,7 @@ const ListArticle = (props) => {
     }, []);
     return (
         <div>
-             <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200 }}/>
+             <Search placeholder="请输入搜索关键字" onSearch={onSearch} onChange={(e)=>onSearch(e.target.value)} style={{ width: 200, marginBottom: 10 }}/>
              <List
                 header={
                     <Row className="list-div">
