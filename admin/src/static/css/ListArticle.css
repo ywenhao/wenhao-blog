@@ -10,3 +10,6 @@
 .list-div {
     width: 100%;
 }
+.list-div a {
+    color: #000000;
+}
