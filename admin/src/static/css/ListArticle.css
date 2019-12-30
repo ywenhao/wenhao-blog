@@ -9,7 +9,14 @@
 }
 .list-div {
     width: 100%;
+    text-align: center;
+}
+.list-div .title {
+    text-align: left;
 }
 .list-div a {
     color: #000000;
+}
+.list-div button {
+    margin-right: 10px;
 }

@@ -50,7 +50,7 @@ const ListArticle = (props) => {
              <List
                 header={
                     <Row className="list-div">
-                        <Col span={8}>
+                        <Col span={8} className="title">
                             <b>标题</b>
                         </Col>
                         <Col span={4}>
@@ -74,7 +74,7 @@ const ListArticle = (props) => {
                 renderItem={item => (
                     <List.Item>
                         <Row className="list-div">
-                            <Col span={8}>
+                            <Col span={8} className="title">
                                 <Link to={"/article/edit/"+ item.id}>
                                     {item.title}
                                 </Link>
