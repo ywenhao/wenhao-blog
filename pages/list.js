@@ -24,7 +24,7 @@ const ListPage = (list) => {
             </Head>
             <Header/>
             <Row className="comm-main" type="flex" justify="center">
-                <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+                <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={10}>
                     <div>
                         <div className="bread-div">
                             <Breadcrumb>
@@ -32,7 +32,6 @@ const ListPage = (list) => {
                                 <Breadcrumb.Item>视频列表</Breadcrumb.Item>
                             </Breadcrumb>
                         </div>
-
                         <List
                             itemLayout="vertical"
                             dataSource={mylist}
