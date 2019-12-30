@@ -1,4 +1,6 @@
 const admin = '/admin/';
+// const admin = '/api/admin/';
+// const defaultUrl = '/api/default/';
 const defaultUrl = '/default/';
 
 const servicePath = {
