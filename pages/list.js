@@ -21,7 +21,7 @@ const ListPage = (list) => {
             <Head>
                 <title>Ywenhao's Blog - List</title>
             </Head>
-            <Header/>
+            <Header />
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={10}>
                     <div>
