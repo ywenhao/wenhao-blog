@@ -17,7 +17,6 @@ import Tocify from '../components/tocify.tsx'
 import  servicePath  from '../config/apiUrl'
 
 const Detailed = (props) => {
-    console.log(props);
     const [isSpinning, setIsSpinng] = React.useState(true);
     let articleContent = props.article_content
     React.useEffect(() => {
