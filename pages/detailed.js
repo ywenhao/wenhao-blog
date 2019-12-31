@@ -17,6 +17,7 @@ import Tocify from '../components/tocify.tsx'
 import  servicePath  from '../config/apiUrl'
 
 const Detailed = (props) => {
+    console.log(props);
     const [isSpinning, setIsSpinng] = React.useState(true);
     let articleContent = props.article_content
     React.useEffect(() => {
@@ -57,13 +58,13 @@ const Detailed = (props) => {
                             <div className="bread-div">
                                 <Breadcrumb>
                                     <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                                    <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-                                    <Breadcrumb.Item>xxxx</Breadcrumb.Item>
+                                    <Breadcrumb.Item>{props.typeName}</Breadcrumb.Item>
+                                    <Breadcrumb.Item>{props.title}</Breadcrumb.Item>
                                 </Breadcrumb>
                             </div>
                             <div>
                                 <div className="detailed-title">
-                                    React实战视频教程-技术胖Blog开发(更新08集)
+                                    {props.title}
                                 </div>
                                 <div className="list-icon center">
                                     <span><Icon type="calendar"/>{props.addTime}</span>
