@@ -1,5 +1,5 @@
-// const ipUrl = 'http://blogapi.cocoku.xyz/default/';
-const ipUrl = 'http://127.0.0.1:7001/default/';
+const ipUrl = 'http://blogapi.cocoku.xyz/default/';
+// const ipUrl = 'http://127.0.0.1:7001/default/';
 
 const servicePath = {
     getArticleList: ipUrl + 'getArticleList',    //  首页文章列表接口

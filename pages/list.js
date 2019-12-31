@@ -16,7 +16,6 @@ const ListPage = (list) => {
     React.useEffect(()=>{
         setMylist(list.data)
     });
-
     return (
         <>
             <Head>
@@ -29,7 +28,7 @@ const ListPage = (list) => {
                         <div className="bread-div">
                             <Breadcrumb>
                                 <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                                <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+                                <Breadcrumb.Item>{mylist.length && mylist[0].typeName}</Breadcrumb.Item>
                             </Breadcrumb>
                         </div>
                         <List
