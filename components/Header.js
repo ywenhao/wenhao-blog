@@ -22,7 +22,7 @@ const Header = () => {
             const result= await axios(servicePath.getTypeInfo).then(
                 (res) => {
                     setNavArray(res.data.data)
-                    return res.data.data
+                    return res.data.data;
                 }
             )
             setNavArray(result)
