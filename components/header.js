@@ -17,10 +17,10 @@ const Header = () => {
             Router.push('/list?id='+e.key)
         }
     }
-    React.useEffect(()=>{
-        const fetchData = async ()=>{
+    React.useEffect(() => {
+        const fetchData = async () => {
             const result= await axios(servicePath.getTypeInfo).then(
-                (res)=>{
+                (res) => {
                     setNavArray(res.data.data)
                     return res.data.data
                 }
