@@ -27,7 +27,7 @@ const ListPage = (list) => {
                     <div>
                         <div className="bread-div">
                             <Breadcrumb>
-                                <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+                                <Breadcrumb.Item><a href="/index">首页</a></Breadcrumb.Item>
                                 <Breadcrumb.Item>{mylist.length && mylist[0].typeName}</Breadcrumb.Item>
                             </Breadcrumb>
                         </div>
