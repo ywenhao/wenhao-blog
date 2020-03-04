@@ -1,4 +1,4 @@
-const ipUrl = 'http://blogapi.cocoku.xyz/api/default/';
+const ipUrl = 'https://blogapi.cocoku.xyz/api/default/';
 // const ipUrl = 'http://127.0.0.1:7001/default/';
 
 const servicePath = {
