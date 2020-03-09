@@ -1,7 +1,7 @@
-const admin = '/admin/';
-// const admin = '/api/admin/';
-// const defaultUrl = '/api/default/';
-const defaultUrl = '/default/';
+// const admin = '/admin/';
+const admin = '/api/admin/';
+const defaultUrl = '/api/default/';
+// const defaultUrl = '/default/';
 
 const servicePath = {
     getArticleList: defaultUrl + 'getArticleList',    //  首页文章列表接口
