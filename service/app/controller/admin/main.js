@@ -53,7 +53,7 @@ class MainController extends Controller {
       // const openId = new Date().getTime();
       // this.ctx.session.openId = { openId };
       // this.ctx.body = { data: '登录成功', openId };
-      const token = this.app.jwt.sign({ userName }, this.app.config.jwt.secret);
+      const token = this.app.jwt.sign({ userName }, this.app.config.jwt.secret, { expiresIn: 60 * 60 * 2 });
       this.ctx.session.token = token;
       this.ctx.body = { code: 200, data: '登录成功', token };
     } else {
