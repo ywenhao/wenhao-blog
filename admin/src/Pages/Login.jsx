@@ -3,7 +3,6 @@ import { Card, Input, Button, Spin, message } from 'antd';
 import { UserOutlined, KeyOutlined } from '@ant-design/icons'
 import axios from 'axios';
 import  servicePath  from '../config/apiUrl';
-import 'antd/dist/antd.css';
 import '../static/css/Login.css';
 
 function Login(props) {
