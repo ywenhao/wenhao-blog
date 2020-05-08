@@ -4,6 +4,7 @@ import axios from 'axios'
 import  servicePath  from '../config/apiUrl'
 import Link from 'next/link'
 import { Row, Col, List ,Icon , Breadcrumb } from 'antd'
+import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icons'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Author from '../components/Author'
@@ -42,9 +43,9 @@ const ListPage = (list) => {
                                         </Link>
                                     </div>
                                     <div className="list-icon">
-                                        <span><Icon type="calendar" />{item.addTime}</span>
-                                        <span><Icon type="folder" /> {item.typeName}</span>
-                                        <span><Icon type="fire" />  {item.view_count}人</span>
+                                        <span className="tips"><CalendarOutlined />{item.addTime}</span>
+                                        <span className="tips"><FolderOutlined />{item.typeName}</span>
+                                        <span className="tips"><FireOutlined />{item.view_count}人</span>
                                     </div>
                                     <div className="list-context">{item.introduce}</div>
                                 </List.Item>

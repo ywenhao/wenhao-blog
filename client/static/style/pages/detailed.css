@@ -33,6 +33,10 @@ pre >code{
     color:#FFF;
 
 }
+.list-icon .tips{
+  display: inline-block;
+  padding: 0 10px;
+}
 code {
     display: inline-block ;
     background-color:#f3f3f3;

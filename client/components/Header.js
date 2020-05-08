@@ -1,10 +1,12 @@
 import React from 'react'
 import Head from "next/head";
 import '../static/style/components/header.css'
-import { Row, Col, Menu, Icon } from 'antd'
+import { Row, Col, Menu } from 'antd'
+import { HomeOutlined } from '@ant-design/icons'
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
+import { GetIcons } from '../plugins/get-icons'
 import  servicePath  from '../config/apiUrl'
 
 const Header = () => {
@@ -21,8 +23,12 @@ const Header = () => {
         const fetchData = async () => {
             const result= await axios(servicePath.getTypeInfo).then(
                 (res) => {
-                    setNavArray(res.data.data)
-                    return res.data.data
+                    // setNavArray(res.data.data)
+                    const data = res.data.data
+                    data.map(v => {
+                      v.icon =  GetIcons(v.icon)
+                    })
+                    return data
                 }
             )
             setNavArray(result)
@@ -52,15 +58,13 @@ const Header = () => {
                             mode="horizontal"
                             onClick={handleClick}
                         >
-                            <Menu.Item key="0">
-                                <Icon type="home" />
+                            <Menu.Item key="0" icon={<HomeOutlined />}>
                                 博客首页
                             </Menu.Item>
                             {
                                 navArray.map( (item) => {
                                     return(
-                                        <Menu.Item key={item.id}>
-                                            <Icon type={item.icon} />
+                                        <Menu.Item key={item.id} icon={<item.icon />}>
                                             {item.typeName}
                                         </Menu.Item>
                                     )

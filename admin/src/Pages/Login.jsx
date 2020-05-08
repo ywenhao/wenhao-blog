@@ -1,5 +1,6 @@
 import React  from 'react';
-import { Card, Input, Icon, Button, Spin, message } from 'antd';
+import { Card, Input, Button, Spin, message } from 'antd';
+import { UserOutlined, KeyOutlined } from '@ant-design/icons'
 import axios from 'axios';
 import  servicePath  from '../config/apiUrl';
 import 'antd/dist/antd.css';
@@ -53,7 +54,7 @@ function Login(props) {
                         id="userName"
                         size="large"
                         placeholder="Enter your userName"
-                        prefix={<Icon type="user" style={{color:'rgba(0,0,0,.25)'}} />}
+                        prefix={<UserOutlined style={{color:'rgba(0,0,0,.25)'}} />}
                         onChange={(e)=>{setUserName(e.target.value)}}
                     />
                     <br/><br/>
@@ -61,7 +62,7 @@ function Login(props) {
                         id="password"
                         size="large"
                         placeholder="Enter your password"
-                        prefix={<Icon type="key" style={{color:'rgba(0,0,0,.25)'}} />}
+                        prefix={<KeyOutlined style={{color:'rgba(0,0,0,.25)'}} />}
                         onChange={(e)=>{setPassword(e.target.value)}}
                         onPressEnter={checkLogin}
                     />

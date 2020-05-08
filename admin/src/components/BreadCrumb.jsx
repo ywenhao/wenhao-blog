@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { Breadcrumb ,Icon} from 'antd';
+import { Breadcrumb } from 'antd';
 import menus from '../config/menus';
+import { GetIcons } from '../plugins/get-icons'
 
 const BreadCrumb = (props) => {
     const createBreadCrumbData = (location, data) => {
@@ -49,7 +50,8 @@ const BreadCrumb = (props) => {
     if (!routes.length) return null;
     const itemRender = (route, params, routes) => {
         const last = routes.indexOf(route) === routes.length - 1;
-        return last ? <Link to={route.path}>{route.icon && <Icon type={route.icon} />} {route.title}</Link> : <span>{route.icon && <Icon type={route.icon} />} {route.title}</span>;
+        const Icon = route.icon && GetIcons(route.icon);
+        return last ? <Link to={route.path}>{route.icon && <Icon />} {route.title}</Link> : <span>{route.icon && <Icon type={route.icon} />} {route.title}</span>;
     };
     return (
         <div className="breadCrumb" style={{ margin: '16px 0' }}>

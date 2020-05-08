@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import { Row, Col, Affix, Icon, Breadcrumb, Spin } from 'antd'
+import { Row, Col, Affix, Breadcrumb, Spin } from 'antd'
+import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icons'
 import ReactMarkdown from 'react-markdown'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -66,9 +67,9 @@ const Detailed = (props) => {
                                     {props.title}
                                 </div>
                                 <div className="list-icon center">
-                                    <span><Icon type="calendar"/>{props.addTime}</span>
-                                    <span><Icon type="folder"/> {props.typeName}</span>
-                                    <span><Icon type="fire"/> {props.view_count}人</span>
+                                    <span className="tips"><CalendarOutlined />{props.addTime}</span>
+                                    <span className="tips"><FolderOutlined />{props.typeName}</span>
+                                    <span className="tips"><FireOutlined />{props.view_count}人</span>
                                 </div>
                                 <div className="detailed-content">
                                         <ReactMarkdown

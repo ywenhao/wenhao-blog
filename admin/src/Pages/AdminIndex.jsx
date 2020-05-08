@@ -1,13 +1,15 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter, Link } from "react-router-dom";
 // import AddArticle from './AddArticle'
-import { Layout, Menu, Icon, message, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, message, Dropdown, Avatar } from 'antd';
+import { GetIcons } from '../plugins/get-icons'
 import Breadcrumb from '../components/BreadCrumb';
 import '../static/css/AdminIndex.css';
 import Axios from 'axios';
 import  servicePath  from '../config/apiUrl';
 import  menus  from '../config/menus';
 import  routes  from '../config/routes';
+import { UserOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -56,14 +58,11 @@ function AdminIndex(props) {
         <Menu theme="dark" defaultSelectedKeys={[menuSelected]} mode="inline" defaultOpenKeys={[menuOpened]}>
             {
                 menus.map(value => {
+                  const Icon = GetIcons(value.icon)
                     return value.SubMenu?(<SubMenu
                         key={value.path}
-                        title={
-                            <span>
-                                <Icon type={value.icon} />
-                                <span>{value.title}</span>
-                            </span>
-                        }
+                        title={value.title}
+                        icon={<Icon />}
                     >
                         {
                             value.children.map(v => (
@@ -76,10 +75,7 @@ function AdminIndex(props) {
                         }
                     </SubMenu>):(
                         <Menu.Item key={value.path}>
-                            <Link to={value.path} >
-                                <Icon type={value.icon} />
-                                <span>{value.title}</span>
-                            </Link>
+                            <Link to={value.path} >{<Icon />}{value.title}</Link>
                         </Menu.Item>
                     );
                 })
@@ -99,7 +95,7 @@ function AdminIndex(props) {
               visible={avatarVisible}
               onVisibleChange={(e)=>setAvatarVisible(e)}
               >
-              <Avatar icon="user" style={{position: "absolute", right: 40, top: 20}}/>
+              <Avatar icon={<UserOutlined />} style={{position: "absolute", right: 40, top: 20}}/>
             </Dropdown>
         </Header>
         <Content style={{ margin: '0 16px' }}>

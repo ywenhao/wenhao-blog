@@ -50,7 +50,7 @@ function AddArticle() {
         }
     }, []);
     marked.setOptions({
-        renderer: marked.Renderer(),
+        renderer: new marked.Renderer(),
         gfm: true,
         pedantic: false,
         sanitize: false,

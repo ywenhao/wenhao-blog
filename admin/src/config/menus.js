@@ -1,7 +1,7 @@
 const menus = [
     {   SubMenu: false,
         title: '工作台',
-        icon: 'pie-chart',
+        icon: 'pieChart',
         path: '/index',
     },
     // {   SubMenu: false,

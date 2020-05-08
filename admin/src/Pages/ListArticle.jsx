@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios'
 import servicePath from '../config/apiUrl'
 import { List, Input, Button, message, Modal, Row, Col } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../static/css/ListArticle.css';
 const { Search } = Input;
@@ -89,8 +90,8 @@ const ListArticle = (props) => {
                               {item.view_count}
                             </Col>
                             <Col span={4}>
-                                <Button icon="edit" type="primary" onClick={() => editHandler(item.id)}/>
-                                <Button icon="delete" type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
+                                <Button icon={<EditOutlined />} type="primary" onClick={() => editHandler(item.id)}/>
+                                <Button icon={<DeleteOutlined />} type="danger" onClick={() => deleteHandler(item.id, item.title)}/>
                             </Col>
                         </Row>
                     </List.Item>
