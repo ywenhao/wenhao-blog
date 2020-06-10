@@ -1,7 +1,10 @@
-// const admin = '/admin/';
-const admin = '/api/admin/';
-const defaultUrl = '/api/default/';
-// const defaultUrl = '/default/';
+let admin = '/admin/';
+let defaultUrl = '/default/';
+
+if (process.env.NODE_ENV === 'production') {
+    admin = '/api/admin/';
+    defaultUrl = '/api/default/';
+}
 
 const servicePath = {
     getArticleList: defaultUrl + 'getArticleList',    //  首页文章列表接口
@@ -15,4 +18,5 @@ const servicePath = {
     addArticle: admin + 'addArticle',
     delArticle: admin + 'delArticle',
 };
+
 export default servicePath;
