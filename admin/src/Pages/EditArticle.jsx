@@ -39,18 +39,19 @@ function EditArticle(props) {
         } else {
             Axios(servicePath.getTypeInfo).then(res=>{
                 setTypeInfo(res.data.data);
-            });
-
-            Axios(servicePath.getArticleById + articleId).then(res=> {
-                const data = res.data.data[0];
-                setSelectType(data.typeId);
-                setArticleTitle(data.title);
-                setIntroducemd(data.introduce);
-                setUpdateDate(data.updateTime);
-                setIntroducehtml(marked(data.introduce));
-                setArticleContent(data.article_content);
-                setMarkdownContent(marked(data.article_content));
+            }).then(() => {
+                Axios(servicePath.getArticleById + articleId).then(res=> {
+                    const data = res.data.data[0];
+                    setSelectType(data.typeId);
+                    setArticleTitle(data.title);
+                    setIntroducemd(data.introduce);
+                    setUpdateDate(data.updateTime);
+                    setIntroducehtml(marked(data.introduce));
+                    setArticleContent(data.article_content);
+                    setMarkdownContent(marked(data.article_content));
+                })
             })
+
         }
     }, [articleId]);
     marked.setOptions({

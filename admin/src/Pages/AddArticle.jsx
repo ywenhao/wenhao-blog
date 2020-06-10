@@ -15,8 +15,8 @@ function AddArticle() {
     const [markdownContent, setMarkdownContent] = useState('预览内容') //html内容
     const [introducemd, setIntroducemd] = useState()            //简介的markdown内容
     const [introducehtml, setIntroducehtml] = useState('等待编辑') //简介的html内容
-    const [showDate, setShowDate] = useState('')   //发布日期
-    // const [updateDate,setUpdateDate] = useState() //修改日志的日期
+    const [showDate, setShowDate] = useState('')   //显示日期
+    const [createDate,setCreateDate] = useState() //创建日志的日期
     const [typeInfo , setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType, setSelectType] = useState(1) //选择的文章类别
     const getDate = () => {
@@ -26,7 +26,15 @@ function AddArticle() {
         if(month < 10) month = '0' + month;
         let day = date.getDate();
         if(day < 10) day = '0' + day;
+        let hours = date.getHours();
+        if(hours < 10) hours = '0' + hours;
+        let minutes = date.getMinutes();
+        if(minutes < 10) minutes = '0' + minutes;
+        let seconds = date.getSeconds();
+        if(seconds < 10) seconds = '0' + seconds;
+
         setShowDate(`${year}-${month}-${day}`);
+        setCreateDate(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`);
     }
     React.useEffect(() => {
         const articleData = sessionStorage.getItem('articleData');
@@ -94,7 +102,7 @@ function AddArticle() {
         Axios.post(servicePath.addArticle, {
             articleId,
             articleTitle,
-            showDate,
+            createDate,
             selectedType,
             introducemd,
             articleContent

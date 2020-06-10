@@ -14,7 +14,7 @@ class MainController extends Controller {
     const title = this.ctx.request.body.articleTitle;
     const introduce = this.ctx.request.body.introducemd;
     const article_content = this.ctx.request.body.articleContent;
-    const addTime = this.ctx.request.body.showDate;
+    const addTime = this.ctx.request.body.createDate;
     const update_time = this.ctx.request.body.updateDate;
     // let sql;
     let res;

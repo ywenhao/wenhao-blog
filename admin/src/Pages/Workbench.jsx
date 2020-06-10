@@ -5,7 +5,7 @@ import ReactEcharts from 'echarts-for-react';
 const Workbench = () => {
     const option = {
         title:{
-            text:'用户骑行订单',
+            text:'访问统计',
             x:'center'
         },
         tooltip:{
@@ -19,7 +19,7 @@ const Workbench = () => {
         },
         series:[
             {
-                name:'OFO订单量',
+                name:'访问量',
                 type:'line',   //这块要定义type类型，柱形图是bar,饼图是pie
                 data:[1000,2000,1500,3000,2000,1200,800]
             }
