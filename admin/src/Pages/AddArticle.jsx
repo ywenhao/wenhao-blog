@@ -19,22 +19,29 @@ function AddArticle() {
     const [createDate,setCreateDate] = useState() //创建日志的日期
     const [typeInfo , setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType, setSelectType] = useState(1) //选择的文章类别
-    const getDate = () => {
+    const getDate = (time) => {
+        let show, create;
+
         const date = new Date();
         const year = date.getFullYear();
         let month = date.getMonth() + 1;
-        if(month < 10) month = '0' + month;
+        if (month < 10) month = '0' + month;
         let day = date.getDate();
-        if(day < 10) day = '0' + day;
+        if (day < 10) day = '0' + day;
         let hours = date.getHours();
-        if(hours < 10) hours = '0' + hours;
+        if (hours < 10) hours = '0' + hours;
         let minutes = date.getMinutes();
-        if(minutes < 10) minutes = '0' + minutes;
+        if (minutes < 10) minutes = '0' + minutes;
         let seconds = date.getSeconds();
-        if(seconds < 10) seconds = '0' + seconds;
+        if (seconds < 10) seconds = '0' + seconds;
 
-        setShowDate(`${year}-${month}-${day}`);
-        setCreateDate(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`);
+        if (!!time) show = time;
+        
+        show =  `${year}-${month}-${day}`;
+        create = `${show} ${hours}:${minutes}:${seconds}`;
+        
+        setShowDate(show);
+        setCreateDate(create);
     }
     React.useEffect(() => {
         const articleData = sessionStorage.getItem('articleData');
@@ -190,7 +197,7 @@ function AddArticle() {
                                 </div>
                                 <DatePicker
                                     format="YYYY-MM-DD"
-                                    onChange={(e, v)=>setShowDate(v)}
+                                    onChange={(e, v)=>getDate(v)}
                                     placeholder={showDate}
                                     size="large"
                                 />
