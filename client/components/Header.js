@@ -41,7 +41,7 @@ const Header = () => {
             <Head>
                 <meta name="description" content="Ywenhao's Blog 一位前端程序猿的博客，不定期更新。"/>
                 <meta name="keywords" content="ywenhao,Ywenhao,Blog,Ywenhao's Blog,前端,web前端,前端博客"/>
-                <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
+                <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
             </Head>
             <div className="header">
                 <Row type="flex" justify="center">
