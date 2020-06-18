@@ -5,3 +5,5 @@ export const GET_ARTICLE_LIST = 'GET_ARTICLE_LIST'
 export const SET_ARTICLES = 'SET_ARTICLES'
 export const SET_ARTICLE = 'SET_ARTICLE'
 export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST'
+
+export const SET_LOADING = 'SET_LOADING'

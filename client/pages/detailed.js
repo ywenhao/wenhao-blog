@@ -17,13 +17,15 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 import Tocify from '../components/tocify.tsx'
 
-const Detailed = ({ article }) => {
-    const [isSpinning, setIsSpinng] = React.useState(true)
+const Detailed = ({ id }) => {
+    const dispatch = useDispatch()
+    const loading = useSelector(state => state.article.loading)
+    const article = useSelector(state => state.article.article)
     let articleContent = article.article_content
     
-    React.useEffect(() => {
-        articleContent && setIsSpinng(false)
-    }, [articleContent])
+    React.useEffect(() => {    
+        dispatch(getArticle(id))
+    }, [id])
     const tocify = new Tocify()
     const renderer = new marked.Renderer();
       renderer.heading = function(text, level) {
@@ -52,7 +54,7 @@ const Detailed = ({ article }) => {
                 <title>Ywenhao's Blog - Detailed</title>
             </Head>
             <Header/>
-            <Spin spinning={isSpinning} tip="Loading...">
+            <Spin spinning={loading} tip="Loading...">
                 <Row className="comm-main" type="flex" justify="center">
                     <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={10}>
                         <div>
@@ -107,11 +109,8 @@ const Detailed = ({ article }) => {
 }
 
 Detailed.getInitialProps = context => {
-    const dispatch = useDispatch()
-    const id = context.query.id
-    dispatch(getArticle(id))
-    const article = useSelector(state => state.article.article)
-    return { article }
+    let id = context.query.id
+    return { id }
 }
 
 export default Detailed

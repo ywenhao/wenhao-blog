@@ -2,11 +2,13 @@ import {
   SET_ARTICLE,
   SET_ARTICLES,
   SET_ARTICLE_LIST,
+  SET_LOADING,
 } from '../constants'
 
 const INITIAL_STATE = {
   list: [],
   article: {},
+  loading: true,
 }
 
 export default function article(state = INITIAL_STATE, action) {
@@ -23,6 +25,9 @@ export default function article(state = INITIAL_STATE, action) {
       const { list: articleList } = action.payload
       return { ...state, list: articleList }
 
+    case SET_LOADING:
+      const { loading } = action.payload
+      return { ...state, loading }
     default:
       return state
   }

@@ -7,16 +7,31 @@ import {
   SET_ARTICLE,
   SET_ARTICLES,
   SET_ARTICLE_LIST,
+  SET_LOADING,
 } from '../constants'
 
 function* getArticle(id) {
   try {
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: true,
+      }
+    })
+
     const article = yield call(articleApi.getArticle, id)
 
     yield put({
       type: SET_ARTICLE,
       payload: {
         article,
+      }
+    })
+
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: false,
       }
     })
   } catch (err) {
@@ -33,12 +48,26 @@ function* watchGetArticle() {
 
 function* getArticles(keyword) {
   try {
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: true,
+      }
+    })
+
     const list = yield call(articleApi.getArticles, keyword)
 
     yield put({
       type: SET_ARTICLES,
       payload: {
         list,
+      }
+    })
+
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: false,
       }
     })
   } catch (err) {
@@ -55,12 +84,26 @@ function* watchGetArticles() {
 
 function* getArticleList(id) {
   try {
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: true,
+      }
+    })
+
     const list = yield call(articleApi.getArticleList, id)
 
     yield put({
       type: SET_ARTICLE_LIST,
       payload: {
         list,
+      }
+    })
+
+    yield put({
+      type: SET_LOADING,
+      payload: {
+        loading: false,
       }
     })
   } catch (err) {
