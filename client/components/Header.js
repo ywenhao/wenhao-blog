@@ -1,40 +1,27 @@
 import React from 'react'
 import Head from "next/head";
-import '../static/style/components/header.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { getClassify } from '../store/actions'
 import { Row, Col, Menu } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 import Router from 'next/router'
 import Link from 'next/link'
-import axios from 'axios'
-import { GetIcons } from '../plugins/get-icons'
-import  servicePath  from '../config/apiUrl'
+import '../static/style/components/header.css'
 
 const Header = () => {
-    const [ navArray , setNavArray ] = React.useState([]);
+    const dispatch = useDispatch()
+    const navArray = useSelector(state => state.classify)
+    React.useEffect(() => {
+      dispatch(getClassify())
+    }, [])
     //跳转到列表页
     const handleClick = (e)=> {
-        if(e.key === '0') {
+        if (e.key === '0') {
             Router.push('/index')
-        }else{
-            Router.push('/list?id='+e.key)
+        } else {
+            Router.push('/list?id=' + e.key)
         }
     }
-    React.useEffect(() => {
-        const fetchData = async () => {
-            const result= await axios(servicePath.getTypeInfo).then(
-                (res) => {
-                    // setNavArray(res.data.data)
-                    const data = res.data.data
-                    data.map(v => {
-                      v.icon =  GetIcons(v.icon)
-                    })
-                    return data
-                }
-            )
-            setNavArray(result)
-        }
-        fetchData()
-    },[])
 
     return (
         <>
@@ -62,7 +49,7 @@ const Header = () => {
                                 博客首页
                             </Menu.Item>
                             {
-                                navArray.map( (item) => {
+                                navArray.map(item => {
                                     return(
                                         <Menu.Item key={item.id} icon={<item.icon />}>
                                             {item.typeName}

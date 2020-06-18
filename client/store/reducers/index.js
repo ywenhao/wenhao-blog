@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import post from './post';
+import article from './article'
+import classify from './classify'
 
 export default combineReducers({
-  post,
-});
+  article,
+  classify,
+})

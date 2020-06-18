@@ -4,7 +4,7 @@ import rootReducer from './reducers';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [ sagaMiddleware, ];
+const middlewares = [ sagaMiddleware ];
 
 export default function configStore() {
   const store = createStore(rootReducer, applyMiddleware(...middlewares));
