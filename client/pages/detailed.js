@@ -22,6 +22,7 @@ const Detailed = ({ id }) => {
     const [isSpinning, setIsSpinng] = React.useState(true)
     const article = useSelector(state => state.article.article)
     let articleContent = article.article_content
+    
     React.useEffect(() => {
         if (articleContent) {
             articleContent && setIsSpinng(false)
