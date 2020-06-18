@@ -15,13 +15,9 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 const { Search } = Input;
 
-const Home = () => {
+const Home = ({ myList }) => {
     const dispatch = useDispatch()
     const myList = useSelector(state => state.article.list)
-
-    React.useEffect(() => {
-      dispatch(getArticles())
-    }, [])
 
     const onSearch = e => {
       dispatch(getArticles(e))
@@ -96,5 +92,12 @@ const Home = () => {
       <Footer />
   </>
 )};
+
+Home.getInitialProps = () => {
+  const dispatch = useDispatch()
+  dispatch(getArticles())
+  const myList = useSelector(state => state.article.list)
+  return { myList }
+}
 
 export default Home

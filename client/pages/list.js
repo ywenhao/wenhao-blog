@@ -13,13 +13,9 @@ import Advert from '../components/Advert'
 import '../static/style/pages/list.css'
 
 
-const ListPage = ({ id }) => {
+const ListPage = ({ myList }) => {
     const dispatch = useDispatch()
     const myList = useSelector(state => state.article.list)
-
-    React.useEffect(() => {
-      dispatch(getArticleList(id))
-    }, [])
 
     return (
         <>
@@ -69,8 +65,11 @@ const ListPage = ({ id }) => {
 };
 
 ListPage.getInitialProps = context => {
-    let id = context.query.id
-    return { id }
+    const id = context.query.id
+    const dispatch = useDispatch()
+    dispatch(getArticleList(id))
+    const myList = useSelector(state => state.article.list)
+    return { myList }
 }
 
 export default ListPage

@@ -17,18 +17,12 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 import Tocify from '../components/tocify.tsx'
 
-const Detailed = ({ id }) => {
-    const dispatch = useDispatch()
+const Detailed = ({ article }) => {
     const [isSpinning, setIsSpinng] = React.useState(true)
-    const article = useSelector(state => state.article.article)
     let articleContent = article.article_content
     
     React.useEffect(() => {
-        if (articleContent) {
-            articleContent && setIsSpinng(false)
-        } else {
-            dispatch(getArticle(id))
-        }
+        articleContent && setIsSpinng(false)
     }, [articleContent])
     const tocify = new Tocify()
     const renderer = new marked.Renderer();
@@ -113,8 +107,11 @@ const Detailed = ({ id }) => {
 }
 
 Detailed.getInitialProps = context => {
-    let id = context.query.id
-    return { id }
+    const dispatch = useDispatch()
+    const id = context.query.id
+    dispatch(getArticle(id))
+    const article = useSelector(state => state.article.article)
+    return { article }
 }
 
 export default Detailed

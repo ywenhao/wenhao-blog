@@ -8,13 +8,7 @@ import Router from 'next/router'
 import Link from 'next/link'
 import '../static/style/components/header.css'
 
-const Header = () => {
-    const dispatch = useDispatch()
-    const navArray = useSelector(state => state.classify)
-
-    React.useEffect(() => {
-        !navArray.length && dispatch(getClassify())
-    }, [navArray])
+const Header = ({ navArray }) => {
     //跳转到列表页
     const handleClick = (e)=> {
         if (e.key === '0') {
@@ -65,5 +59,11 @@ const Header = () => {
         </>
     )
 };
+
+Header.getInitialProps = () => {
+    const dispatch = useDispatch()
+    const navArray = useSelector(state => state.classify)
+    !navArray.length && dispatch(getClassify())
+}
 
 export default Header
