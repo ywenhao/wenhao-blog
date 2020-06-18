@@ -26,9 +26,20 @@ async function getArticle(id) {
   }
 }
 
+async function getArticleList(id) {
+  try {
+    const list = await Axios(servicePath.getListById + id).then(res => res.data.data)
+    
+    return list
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const articleApi = {
   getArticles,
   getArticle,
+  getArticleList,
 }
 
 export default articleApi

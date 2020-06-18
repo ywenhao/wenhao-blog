@@ -1,7 +1,7 @@
 export const GET_ARTICLES = 'GET_ARTICLES'
-export const GET_ARTCILE = 'GET_ARTCILE'
-export const GET_ARTILE_LIST = 'GET_ARTILE_LIST'
+export const GET_ARTICLE = 'GET_ARTICLE'
+export const GET_ARTICLE_LIST = 'GET_ARTICLE_LIST'
 
 export const SET_ARTICLES = 'SET_ARTICLES'
-export const SET_ARTCILE = 'SET_ARTCILE'
-export const SET_ARTILE_LIST = 'SET_ARTILE_LIST'
+export const SET_ARTICLE = 'SET_ARTICLE'
+export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST'

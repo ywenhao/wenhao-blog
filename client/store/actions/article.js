@@ -1,7 +1,7 @@
 import {
   GET_ARTICLES,
-  GET_ARTCILE,
-  GET_ARTILE_LIST,
+  GET_ARTICLE,
+  GET_ARTICLE_LIST,
 } from '../constants'
 
 export function getArticles(keyword) {
@@ -15,7 +15,7 @@ export function getArticles(keyword) {
 
 export function getArticleList(id) {
   return {
-    type: GET_ARTILE_LIST,
+    type: GET_ARTICLE_LIST,
     payload: {
       id,
     },
@@ -24,7 +24,7 @@ export function getArticleList(id) {
 
 export function getArticle(id) {
   return {
-    type: GET_ARTCILE,
+    type: GET_ARTICLE,
     payload: {
       id,
     },

@@ -1,7 +1,7 @@
 import {
-  SET_ARTCILE,
+  SET_ARTICLE,
   SET_ARTICLES,
-  SET_ARTILE_LIST,
+  SET_ARTICLE_LIST,
 } from '../constants'
 
 const INITIAL_STATE = {
@@ -15,11 +15,11 @@ export default function article(state = INITIAL_STATE, action) {
       const { list } = action.payload
       return { ...state, list }
 
-    case SET_ARTCILE:
+    case SET_ARTICLE:
       const { article } = action.payload
       return { ...state, article }
 
-    case SET_ARTILE_LIST:
+    case SET_ARTICLE_LIST:
       const { list } = action.payload
       return { ...state, list }
 
