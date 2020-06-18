@@ -10,21 +10,19 @@ import Footer from '../components/Footer'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import '../static/style/pages/index.css'
-import Axios from 'axios'
-import  servicePath  from '../config/apiUrl'
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 const { Search } = Input;
 
-const Home = (res) => {
+const Home = () => {
     const dispatch = useDispatch()
     const myList = useSelector(state => state.article.list)
+
     React.useEffect(() => {
       dispatch(getArticles())
     }, [])
-// console.log(myList)
-    const [ type ] = React.useState(res.type);
+
     const onSearch = e => {
       dispatch(getArticles(e))
     };
@@ -49,7 +47,7 @@ const Home = (res) => {
     <Head>
         <title>Ywenhao's Blog</title>
     </Head>
-    <Header type={type}/>
+    <Header />
     <Row className="comm-main" type="flex" justify="center">
       <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={10}>
           <List

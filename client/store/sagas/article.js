@@ -1,4 +1,5 @@
 import { take, fork, call, put } from 'redux-saga/effects'
+import { articleApi } from '../../api'
 import {
   GET_ARTICLE,
   GET_ARTICLES,
@@ -10,7 +11,7 @@ import {
 
 function* getArticle(id) {
   try {
-    const article = yield call(classifyApi.getArticle, id)
+    const article = yield call(articleApi.getArticle, id)
 
     yield put({
       type: SET_ARTICLE,
@@ -32,7 +33,7 @@ function* watchGetArticle() {
 
 function* getArticles(keyword) {
   try {
-    const list = yield call(classifyApi.getArticles, keyword)
+    const list = yield call(articleApi.getArticles, keyword)
 
     yield put({
       type: SET_ARTICLES,
@@ -54,7 +55,7 @@ function* watchGetArticles() {
 
 function* getArticleList(id) {
   try {
-    const list = yield call(classifyApi.getArticle, id)
+    const list = yield call(articleApi.getArticleList, id)
 
     yield put({
       type: SET_ARTICLE_LIST,

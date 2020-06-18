@@ -1,5 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
+import { useSelector, useDispatch } from 'react-redux'
+import { getArticle } from '../store/actions'
 import { Row, Col, Affix, Breadcrumb, Spin } from 'antd'
 import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icons'
 import ReactMarkdown from 'react-markdown'
@@ -13,15 +15,19 @@ import 'markdown-navbar/dist/navbar.css'
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
-import Axios from 'axios'
 import Tocify from '../components/tocify.tsx'
-import  servicePath  from '../config/apiUrl'
 
-const Detailed = (props) => {
-    const [isSpinning, setIsSpinng] = React.useState(true);
-    let articleContent = props.article_content
+const Detailed = ({ id }) => {
+    const dispatch = useDispatch()
+    const [isSpinning, setIsSpinng] = React.useState(true)
+    const article = useSelector(state => state.article.article)
+    let articleContent = article.article_content
     React.useEffect(() => {
-        articleContent && setIsSpinng(false)
+        if (articleContent) {
+            articleContent && setIsSpinng(false)
+        } else {
+            dispatch(getArticle(id))
+        }
     }, [articleContent])
     const tocify = new Tocify()
     const renderer = new marked.Renderer();
@@ -44,7 +50,7 @@ const Detailed = (props) => {
             return hljs.highlightAuto(code).value;
         }
     });
-    let markdown = marked(props.article_content);
+    let markdown =  articleContent && marked(articleContent);
     return (
         <>
             <Head>
@@ -58,18 +64,18 @@ const Detailed = (props) => {
                             <div className="bread-div">
                                 <Breadcrumb>
                                     <Breadcrumb.Item><a href="/index">首页</a></Breadcrumb.Item>
-                                    <Breadcrumb.Item>{props.typeName}</Breadcrumb.Item>
-                                    <Breadcrumb.Item>{props.title}</Breadcrumb.Item>
+                                    <Breadcrumb.Item>{article.typeName}</Breadcrumb.Item>
+                                    <Breadcrumb.Item>{article.title}</Breadcrumb.Item>
                                 </Breadcrumb>
                             </div>
                             <div>
                                 <div className="detailed-title">
-                                    {props.title}
+                                    {article.title}
                                 </div>
                                 <div className="list-icon center">
-                                    <span className="tips"><CalendarOutlined />{props.addTime}</span>
-                                    <span className="tips"><FolderOutlined />{props.typeName}</span>
-                                    <span className="tips"><FireOutlined />{props.view_count}人</span>
+                                    <span className="tips"><CalendarOutlined />{article.addTime}</span>
+                                    <span className="tips"><FolderOutlined />{article.typeName}</span>
+                                    <span className="tips"><FireOutlined />{article.view_count}人</span>
                                 </div>
                                 <div className="detailed-content">
                                         <ReactMarkdown
@@ -105,18 +111,9 @@ const Detailed = (props) => {
     )
 }
 
-Detailed.getInitialProps = async(context)=>{
-
+Detailed.getInitialProps = context => {
     let id = context.query.id
-    const promise = new Promise((resolve)=>{
-
-      Axios(servicePath.getArticleById + id).then(
-        (res)=>{
-          resolve(res.data.data[0])
-        }
-      )
-    })
-    return await promise
+    return { id }
 }
 
 export default Detailed

@@ -20,8 +20,8 @@ export default function article(state = INITIAL_STATE, action) {
       return { ...state, article }
 
     case SET_ARTICLE_LIST:
-      const { list } = action.payload
-      return { ...state, list }
+      const { list: articleList } = action.payload
+      return { ...state, list: articleList }
 
     default:
       return state

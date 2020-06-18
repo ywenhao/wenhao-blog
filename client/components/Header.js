@@ -11,9 +11,10 @@ import '../static/style/components/header.css'
 const Header = () => {
     const dispatch = useDispatch()
     const navArray = useSelector(state => state.classify)
+
     React.useEffect(() => {
-      dispatch(getClassify())
-    }, [])
+        !navArray.length && dispatch(getClassify())
+    }, [navArray])
     //跳转到列表页
     const handleClick = (e)=> {
         if (e.key === '0') {

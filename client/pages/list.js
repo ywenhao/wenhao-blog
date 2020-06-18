@@ -1,9 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
-import axios from 'axios'
-import  servicePath  from '../config/apiUrl'
 import Link from 'next/link'
-import { Row, Col, List ,Icon , Breadcrumb } from 'antd'
+// import { withRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
+import { getArticleList } from '../store/actions'
+import { Row, Col, List , Breadcrumb } from 'antd'
 import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icons'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -12,11 +13,14 @@ import Advert from '../components/Advert'
 import '../static/style/pages/list.css'
 
 
-const ListPage = (list) => {
-    const [ mylist , setMylist ] = React.useState(list.data);
-    React.useEffect(()=>{
-        setMylist(list.data)
-    });
+const ListPage = ({ id }) => {
+    const dispatch = useDispatch()
+    const myList = useSelector(state => state.article.list)
+
+    React.useEffect(() => {
+      dispatch(getArticleList(id))
+    }, [])
+
     return (
         <>
             <Head>
@@ -29,12 +33,12 @@ const ListPage = (list) => {
                         <div className="bread-div">
                             <Breadcrumb>
                                 <Breadcrumb.Item><a href="/index">首页</a></Breadcrumb.Item>
-                                <Breadcrumb.Item>{mylist.length && mylist[0].typeName}</Breadcrumb.Item>
+                                {/* <Breadcrumb.Item>{myList.length && mylist[0].typeName}</Breadcrumb.Item> */}
                             </Breadcrumb>
                         </div>
                         <List
                             itemLayout="vertical"
-                            dataSource={mylist}
+                            dataSource={myList}
                             renderItem={item => (
                                 <List.Item>
                                     <div className="list-title">
@@ -64,14 +68,9 @@ const ListPage = (list) => {
     )
 };
 
-ListPage.getInitialProps = async (context)=>{
-    const id =context.query.id;
-    const promise = new Promise((resolve)=>{
-        axios(servicePath.getListById + id).then(
-            (res)=>resolve(res.data)
-        )
-    });
-    return await promise
-};
+ListPage.getInitialProps = context => {
+    let id = context.query.id
+    return { id }
+}
 
 export default ListPage
