@@ -6,6 +6,7 @@ import { Row, Col, Menu } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 import Router from 'next/router'
 import Link from 'next/link'
+import info from '../config/info'
 import '../static/style/components/header.css'
 
 const Header = () => {
@@ -27,8 +28,8 @@ const Header = () => {
     return (
         <>
             <Head>
-                <meta name="description" content="Ywenhao's Blog 一位前端程序猿的博客，不定期更新。"/>
-                <meta name="keywords" content="ywenhao,Ywenhao,Blog,Ywenhao's Blog,前端,web前端,前端博客"/>
+                <meta name="description" content={info.description}/>
+                <meta name="keywords" content={info.keywords}/>
                 <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
             </Head>
             <div className="header">

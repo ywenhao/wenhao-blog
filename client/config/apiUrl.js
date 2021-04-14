@@ -1,8 +1,8 @@
-// let ipUrl = 'http://127.0.0.1:7001/default/';
-let ipUrl = 'https://blogapi.cocoku.xyz/api/default/';
+let ipUrl = 'http://127.0.0.1:7001/default/';
+// let ipUrl = 'https://blogapi.nedink.cn/api/default/';
 
 if (process.env.NODE_ENV === 'production') {
-    ipUrl = 'https://blogapi.cocoku.xyz/api/default/';
+    ipUrl = 'https://blogapi.nedink.cn/api/default/';
 }
 
 const servicePath = {
